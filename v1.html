@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SST ประกันชีวิต — ความมั่นคงที่คุณวางใจได้</title>
+  <meta name="description" content="SST ประกันชีวิต ให้ความคุ้มครองที่ครอบครัวของคุณสมควรได้รับ ด้วยแผนประกันที่ออกแบบมาเพื่อทุกช่วงชีวิต">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.460.0"></script>
+  <style>
+    /* ── Variables ─────────────────────────────────────── */
+    :root {
+      --navy:   #0D1B2A;
+      --slate:  #1E3A5F;
+      --steel:  #4A7FA5;
+      --ice:    #C8DCF0;
+      --white:  #FFFFFF;
+      --font-th: 'IBM Plex Sans Thai', 'Sukhumvit Set', sans-serif;
+      --font-cd: 'IBM Plex Sans Condensed', sans-serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --r: 10px;
+    }
+
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-th);
+      font-weight: 300;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.8;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ── Typography helpers ────────────────────────────── */
+    h1, h2, h3, h4, h5 {
+      font-family: var(--font-th);
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--white);
+    }
+    html[lang="en"] h1,
+    html[lang="en"] h2,
+    html[lang="en"] h3,
+    html[lang="en"] h4 {
+      font-family: var(--font-cd);
+      letter-spacing: 0.04em;
+    }
+    html[lang="en"] .kicker,
+    html[lang="en"] .overline,
+    html[lang="en"] .prod-tag {
+      letter-spacing: 0.18em;
+    }
+
+    /* ── Layout ────────────────────────────────────────── */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Buttons ───────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85em 1.8em;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      font-family: var(--font-th);
+      text-decoration: none;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s;
+      cursor: pointer;
+      border: none;
+      min-height: 48px;
+      white-space: nowrap;
+    }
+    .btn--primary {
+      background: var(--steel);
+      color: var(--white);
+    }
+    .btn--primary:hover {
+      background: #5b93ba;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(74,127,165,0.35);
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(200,220,240,0.4);
+    }
+    .btn--ghost:hover {
+      border-color: var(--steel);
+      background: rgba(74,127,165,0.12);
+      transform: translateY(-2px);
+    }
+    .btn--ice {
+      background: var(--ice);
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .btn--ice:hover {
+      background: #daeaf8;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(200,220,240,0.3);
+    }
+
+    /* ── Section labels ────────────────────────────────── */
+    .overline {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--steel);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      letter-spacing: 0;
+    }
+    html[lang="en"] .overline { letter-spacing: 0.18em; }
+
+    /* ── Reveal animations ─────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.45s; }
+
+    /* ══════════════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      transition: background 0.4s, padding 0.4s;
+    }
+    .nav__bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 1.5rem;
+      max-width: 1180px;
+      margin: 0 auto;
+      transition: padding 0.4s;
+    }
+    .nav.solid .nav__bar { padding-top: 1rem; padding-bottom: 1rem; }
+    .nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(13,27,42,0);
+      backdrop-filter: blur(0px);
+      transition: background 0.4s, backdrop-filter 0.4s;
+      z-index: -1;
+    }
+    .nav.solid::before {
+      background: rgba(13,27,42,0.96);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav__logo {
+      font-family: var(--font-cd);
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .nav__logo span { color: var(--steel); }
+
+    .nav__links {
+      display: none;
+      gap: 2.5rem;
+    }
+    @media (min-width: 860px) {
+      .nav__links { display: flex; }
+    }
+    .nav__links a {
+      color: var(--ice);
+      font-size: 0.88rem;
+      font-weight: 400;
+      padding: 0.6rem 0;
+      transition: color 0.25s;
+      position: relative;
+    }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--steel);
+      transition: width 0.3s;
+    }
+    .nav__links a:hover { color: var(--white); }
+    .nav__links a:hover::after { width: 100%; }
+
+    .nav__end {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .lang-sw {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--ice);
+      background: transparent;
+      border: none;
+      font-size: 0.78rem;
+      font-family: var(--font-th);
+      padding: 0.4rem 0.35rem;
+      transition: color 0.25s;
+      line-height: 1;
+    }
+    .lang-sw:hover { color: var(--white); }
+    .lang-sw svg { flex-shrink: 0; }
+    .lang-sw__label { font-weight: 500; }
+
+    .nav__cta-btn {
+      display: none;
+      font-size: 0.85rem;
+      padding: 0.6em 1.4em;
+      min-height: 40px;
+    }
+    @media (min-width: 860px) { .nav__cta-btn { display: inline-flex; } }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+    }
+    @media (min-width: 860px) { .hamburger { display: none; } }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mob-menu {
+      max-height: 0;
+      overflow: hidden;
+      background: rgba(13,27,42,0.98);
+      transition: max-height 0.4s var(--ease);
+      border-top: 1px solid rgba(74,127,165,0);
+      transition: max-height 0.4s var(--ease), border-color 0.4s;
+    }
+    .mob-menu.open {
+      max-height: 420px;
+      border-top-color: rgba(74,127,165,0.2);
+    }
+    .mob-menu__inner {
+      padding: 1.25rem 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .mob-menu__inner a {
+      color: var(--ice);
+      padding: 0.95rem 0;
+      border-bottom: 1px solid rgba(74,127,165,0.12);
+      font-size: 1rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .mob-menu__inner a:hover { color: var(--white); }
+    .mob-menu__inner .btn {
+      margin-top: 1.25rem;
+      width: 100%;
+    }
+
+    /* ══════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 860px) {
+      .hero { flex-direction: row; }
+    }
+
+    .hero__img-col {
+      position: relative;
+      overflow: hidden;
+      height: 52vw;
+      min-height: 280px;
+      max-height: 60vh;
+      flex-shrink: 0;
+    }
+    @media (min-width: 860px) {
+      .hero__img-col {
+        flex: 0 0 60%;
+        height: auto;
+        max-height: none;
+        min-height: 100svh;
+        clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
+      }
+    }
+    .hero__img-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transform: scale(1.06);
+      animation: heroZoom 9s ease-out forwards;
+    }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero__img-col::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(13,27,42,0.55) 100%
+      );
+    }
+    @media (min-width: 860px) {
+      .hero__img-col::after {
+        background: linear-gradient(
+          to right,
+          transparent 55%,
+          rgba(13,27,42,0.7) 100%
+        );
+      }
+    }
+
+    .hero__text-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem 1.5rem 3rem;
+      background: var(--navy);
+    }
+    @media (min-width: 860px) {
+      .hero__text-col {
+        padding: 9rem 3.5rem 4rem 2.5rem;
+      }
+    }
+
+    .hero__kicker.kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--steel);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero__kicker .kicker-dot {
+      width: 24px; height: 1px;
+      background: var(--steel);
+    }
+
+    .hero__heading {
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      animation: fadeUp 0.9s 0.2s var(--ease) both;
+    }
+    html[lang="en"] .hero__heading {
+      font-family: var(--font-cd);
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+    }
+    .hero__heading em {
+      font-style: normal;
+      color: var(--ice);
+    }
+
+    .hero__body {
+      font-size: 1rem;
+      color: rgba(200,220,240,0.8);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+      max-width: 400px;
+      animation: fadeUp 0.9s 0.4s var(--ease) both;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      animation: fadeUp 0.9s 0.55s var(--ease) both;
+    }
+    @media (min-width: 480px) {
+      .hero__actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    .hero__scroll {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: rgba(200,220,240,0.45);
+      font-size: 0.75rem;
+      animation: fadeUp 0.9s 0.8s var(--ease) both;
+    }
+    .hero__scroll i { animation: bounce 2s infinite; }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ══════════════════════════════════════════════════
+       STATS
+    ══════════════════════════════════════════════════ */
+    .stats-band {
+      background: var(--slate);
+      position: relative;
+      padding: 3rem 0 2.5rem;
+    }
+    .stats-band::before {
+      content: '';
+      position: absolute;
+      top: -44px; left: 0; right: 0;
+      height: 44px;
+      background: var(--slate);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1rem;
+    }
+    @media (min-width: 600px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0.5rem;
+    }
+    .stat-item__num {
+      font-family: var(--font-cd);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--ice);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .stat-item__label {
+      font-size: 0.82rem;
+      color: var(--steel);
+      margin-top: 0.4rem;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════════════ */
+    .about {
+      padding: 5rem 0;
+      background: var(--navy);
+    }
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .about__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+      }
+    }
+    .about__text .overline { margin-bottom: 0.75rem; }
+    .about__text h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    html[lang="en"] .about__text h2 { line-height: 1.2; }
+    .about__text p {
+      color: rgba(200,220,240,0.75);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+      font-size: 0.97rem;
+    }
+    .about__text .btn { margin-top: 0.75rem; }
+
+    .about__img-wrap {
+      position: relative;
+    }
+    .about__img-wrap img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+    }
+    @media (min-width: 768px) {
+      .about__img-wrap img { height: 520px; }
+    }
+    .about__img-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      background: var(--steel);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      min-width: 140px;
+      text-align: center;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    }
+    @media (max-width: 767px) {
+      .about__img-badge { bottom: 1rem; left: 1rem; }
+    }
+    .about__img-badge__num {
+      font-family: var(--font-cd);
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .about__img-badge__label {
+      font-size: 0.78rem;
+      opacity: 0.9;
+      margin-top: 0.25rem;
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PRODUCTS
+    ══════════════════════════════════════════════════ */
+    .products {
+      background: var(--navy);
+      padding: 2rem 0 5rem;
+    }
+    .products__header {
+      text-align: center;
+      padding: 3.5rem 1.5rem 3.5rem;
+    }
+    .products__header h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-top: 0.5rem;
+    }
+
+    .prod-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      background: var(--navy);
+    }
+    @media (min-width: 768px) {
+      .prod-row { grid-template-columns: 1fr 1fr; min-height: 500px; }
+      .prod-row--rev .prod-row__img  { order: 2; }
+      .prod-row--rev .prod-row__copy { order: 1; }
+    }
+
+    .prod-row__img {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    @media (min-width: 768px) { .prod-row__img { min-height: auto; } }
+    .prod-row__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease);
+    }
+    .prod-row:hover .prod-row__img img { transform: scale(1.04); }
+    .prod-row__num {
+      position: absolute;
+      bottom: -0.5rem;
+      right: 1rem;
+      font-family: var(--font-cd);
+      font-size: 9rem;
+      font-weight: 700;
+      color: rgba(200,220,240,0.1);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    @media (min-width: 768px) { .prod-row__num { font-size: 12rem; } }
+
+    .prod-row__copy {
+      background: var(--slate);
+      padding: 2.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 1px solid rgba(74,127,165,0.12);
+    }
+    @media (min-width: 768px) {
+      .prod-row__copy { padding: 4rem 3.5rem; border-top: none; }
+    }
+    .prod-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: var(--steel);
+      border: 1px solid rgba(74,127,165,0.5);
+      padding: 0.35em 0.9em;
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    .prod-row__copy h3 {
+      font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+    html[lang="en"] .prod-row__copy h3 { line-height: 1.15; }
+    .prod-row__copy > p {
+      color: rgba(200,220,240,0.72);
+      font-size: 0.93rem;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .prod-features {
+      margin-bottom: 2rem;
+    }
+    .prod-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      color: rgba(200,220,240,0.82);
+      font-size: 0.88rem;
+      padding: 0.55rem 0;
+      border-top: 1px solid rgba(74,127,165,0.12);
+    }
+    .prod-features li:first-child { border-top: none; }
+    .prod-features li i {
+      color: var(--steel);
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PROCESS
+    ══════════════════════════════════════════════════ */
+    .process {
+      background: var(--slate);
+      padding: 5rem 0;
+      position: relative;
+    }
+    .process::before {
+      content: '';
+      position: absolute;
+      top: -44px; left: 0; right: 0;
+      height: 44px;
+      background: var(--slate);
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+    .process__header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .process__header h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+      margin-top: 0.5rem;
+    }
+
+    .process__steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    @media (min-width: 768px) {
+      .process__steps {
+        grid-template-columns: repeat(4, 1fr);
+        position: relative;
+      }
+      .process__steps::before {
+        content: '';
+        position: absolute;
+        top: 2.1rem;
+        left: calc(12.5%);
+        right: calc(12.5%);
+        height: 1px;
+        background: rgba(74,127,165,0.25);
+      }
+    }
+    .process__step {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(74,127,165,0.12);
+    }
+    .process__step:last-child { border-bottom: none; }
+    @media (min-width: 768px) {
+      .process__step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 1.5rem;
+        border-bottom: none;
+        border-right: none;
+      }
+    }
+    .process__icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(74,127,165,0.15);
+      border: 1.5px solid rgba(74,127,165,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--steel);
+      position: relative;
+    }
+    @media (min-width: 768px) { .process__icon { margin-bottom: 1.5rem; } }
+    .process__step-n {
+      position: absolute;
+      top: -8px; right: -8px;
+      width: 18px; height: 18px;
+      background: var(--steel);
+      border-radius: 50%;
+      font-size: 0.62rem;
+      font-weight: 700;
+      font-family: var(--font-cd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+    }
+    .process__step-body h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+    .process__step-body p {
+      font-size: 0.85rem;
+      color: rgba(200,220,240,0.65);
+      line-height: 1.75;
+    }
+    @media (min-width: 768px) {
+      .process__step-body h4 { font-size: 0.95rem; }
+    }
+
+    /* ══════════════════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════════════════ */
+    .testimonials {
+      background: var(--navy);
+      padding: 5rem 0;
+    }
+    .testimonials__header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .testimonials__header h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+      margin-top: 0.5rem;
+    }
+
+    .testi-track {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 1.5rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .testi-track::-webkit-scrollbar { display: none; }
+    @media (min-width: 900px) {
+      .testi-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: visible;
+        padding: 0.5rem 1.5rem 0;
+      }
+    }
+
+    .testi-card {
+      background: rgba(30,58,95,0.55);
+      border: 1px solid rgba(74,127,165,0.18);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      flex: 0 0 85%;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s;
+    }
+    @media (min-width: 600px) { .testi-card { flex: 0 0 72%; } }
+    @media (min-width: 900px) { .testi-card { flex: unset; } }
+    .testi-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1.25rem;
+      color: var(--steel);
+    }
+    .testi-quote {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: rgba(200,220,240,0.82);
+      flex: 1;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .testi-quote::before {
+      content: '\201C';
+      font-size: 4rem;
+      line-height: 0;
+      color: rgba(74,127,165,0.2);
+      position: absolute;
+      top: 1rem; left: -0.5rem;
+      font-family: Georgia, serif;
+    }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-top: 1px solid rgba(74,127,165,0.12);
+      padding-top: 1.25rem;
+    }
+    .testi-author img {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .testi-author__name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: block;
+      line-height: 1.4;
+    }
+    .testi-author__role {
+      font-size: 0.78rem;
+      color: var(--steel);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    /* ══════════════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════════════ */
+    .faq {
+      background: var(--slate);
+      padding: 5rem 0;
+      position: relative;
+    }
+    .faq::before {
+      content: '';
+      position: absolute;
+      top: -44px; left: 0; right: 0;
+      height: 44px;
+      background: var(--slate);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+    .faq__layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 860px) {
+      .faq__layout { grid-template-columns: 1fr 1.8fr; gap: 5rem; align-items: start; }
+    }
+    .faq__aside h2 {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      margin: 0.5rem 0 1rem;
+      line-height: 1.45;
+    }
+    html[lang="en"] .faq__aside h2 { line-height: 1.15; }
+    .faq__aside p {
+      font-size: 0.92rem;
+      color: rgba(200,220,240,0.68);
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid rgba(74,127,165,0.15);
+    }
+    .faq-item:first-child { border-top: 1px solid rgba(74,127,165,0.15); }
+    .faq-btn {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: var(--font-th);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 1.3rem 0;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .faq-btn:hover { color: var(--ice); }
+    .faq-btn i {
+      color: var(--steel);
+      flex-shrink: 0;
+      transition: transform 0.35s var(--ease);
+      margin-top: 0.25rem;
+    }
+    .faq-item.open .faq-btn i { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s var(--ease), padding 0.3s;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer__inner {
+      padding-bottom: 1.25rem;
+      font-size: 0.9rem;
+      color: rgba(200,220,240,0.7);
+      line-height: 1.85;
+    }
+
+    /* ══════════════════════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════════════════════ */
+    .cta-band {
+      position: relative;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .cta-band__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1486707471592-8e7eb7e36f78?w=1600&h=800&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+    .cta-band__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(13,27,42,0.82);
+    }
+    .cta-band__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .cta-band__content h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin: 0.5rem 0 1.25rem;
+      line-height: 1.45;
+    }
+    html[lang="en"] .cta-band__content h2 { line-height: 1.15; }
+    .cta-band__content p {
+      color: rgba(200,220,240,0.78);
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+    .cta-band__btns {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+    @media (min-width: 480px) {
+      .cta-band__btns { flex-direction: row; justify-content: center; }
+    }
+
+    /* ══════════════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════════════ */
+    .contact {
+      background: var(--navy);
+      padding: 5rem 0;
+    }
+    .contact__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 860px) {
+      .contact__grid { grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+    }
+    .contact__info h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin: 0.5rem 0 1.5rem;
+      line-height: 1.45;
+    }
+    html[lang="en"] .contact__info h2 { line-height: 1.15; }
+    .contact__info p {
+      color: rgba(200,220,240,0.68);
+      font-size: 0.92rem;
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .contact-detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      color: rgba(200,220,240,0.8);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .contact-detail i {
+      color: var(--steel);
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 480px) { .form-row { grid-template-columns: 1fr 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
+    .form-field label {
+      font-size: 0.78rem;
+      color: rgba(200,220,240,0.55);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    html[lang="en"] .form-field label { letter-spacing: 0.1em; }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: rgba(30,58,95,0.45);
+      border: 1px solid rgba(74,127,165,0.25);
+      border-radius: 6px;
+      color: var(--white);
+      font-family: var(--font-th);
+      font-size: 0.95rem;
+      padding: 0.85em 1em;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.25s;
+      min-height: 48px;
+    }
+    .form-field textarea { min-height: 110px; resize: vertical; }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--steel);
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(200,220,240,0.3);
+    }
+
+    /* ══════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════ */
+    .footer {
+      background: #07111b;
+      padding: 4rem 0 0;
+      border-top: 1px solid rgba(74,127,165,0.12);
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 600px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+
+    .footer__brand .logo {
+      font-family: var(--font-cd);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--white);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .footer__brand .logo span { color: var(--steel); }
+    .footer__brand p {
+      font-size: 0.85rem;
+      color: rgba(200,220,240,0.45);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .footer__social {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .footer__social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(74,127,165,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(200,220,240,0.5);
+      transition: all 0.25s;
+    }
+    .footer__social a:hover {
+      border-color: var(--steel);
+      color: var(--white);
+      background: rgba(74,127,165,0.15);
+    }
+
+    .footer__col h5 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: rgba(200,220,240,0.45);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    html[lang="en"] .footer__col h5 { letter-spacing: 0.12em; }
+    .footer__col ul { display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer__col ul a {
+      font-size: 0.88rem;
+      color: rgba(200,220,240,0.55);
+      transition: color 0.2s;
+    }
+    .footer__col ul a:hover { color: var(--white); }
+
+    .footer__bottom {
+      margin-top: 3rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid rgba(74,127,165,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 600px) {
+      .footer__bottom { flex-direction: row; justify-content: space-between; }
+    }
+    .footer__bottom p {
+      font-size: 0.78rem;
+      color: rgba(200,220,240,0.3);
+    }
+    .footer__bottom a {
+      color: rgba(200,220,240,0.3);
+      font-size: 0.78rem;
+      transition: color 0.2s;
+    }
+    .footer__bottom a:hover { color: rgba(200,220,240,0.65); }
+
+    /* ── Utility ───────────────────────────────────── */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ════════════════════════════════════════════ -->
+<header class="nav" id="site-nav">
+  <div class="nav__bar">
+    <a href="#" class="nav__logo">SS<span>T</span></a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about"    data-lang-th="เกี่ยวกับเรา"    data-lang-en="About">เกี่ยวกับเรา</a>
+      <a href="#products" data-lang-th="แผนประกัน"       data-lang-en="Plans">แผนประกัน</a>
+      <a href="#process"  data-lang-th="ขั้นตอน"         data-lang-en="How it Works">ขั้นตอน</a>
+      <a href="#faq"      data-lang-th="คำถามที่พบบ่อย"  data-lang-en="FAQ">คำถามที่พบบ่อย</a>
+    </nav>
+
+    <div class="nav__end">
+      <button class="lang-sw" aria-label="Switch language">
+        <i data-lucide="globe" width="14" height="14"></i>
+        <span class="lang-sw__label">TH</span>
+      </button>
+      <a href="#contact" class="btn btn--ghost nav__cta-btn" data-lang-th="ติดต่อเรา" data-lang-en="Contact Us">ติดต่อเรา</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mob-menu" id="mob-menu" aria-hidden="true">
+    <div class="mob-menu__inner">
+      <a href="#about"    data-lang-th="เกี่ยวกับเรา"    data-lang-en="About">เกี่ยวกับเรา</a>
+      <a href="#products" data-lang-th="แผนประกัน"       data-lang-en="Plans">แผนประกัน</a>
+      <a href="#process"  data-lang-th="ขั้นตอน"         data-lang-en="How it Works">ขั้นตอน</a>
+      <a href="#faq"      data-lang-th="คำถามที่พบบ่อย"  data-lang-en="FAQ">คำถามที่พบบ่อย</a>
+      <a href="#contact" class="btn btn--primary" data-lang-th="ติดต่อเรา" data-lang-en="Contact Us">ติดต่อเรา</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ HERO ═══════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero__img-col">
+    <img
+      src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=1200&h=1600&fit=crop"
+      alt="ครอบครัวที่ได้รับการดูแล"
+      loading="eager"
+    >
+  </div>
+
+  <div class="hero__text-col">
+    <p class="hero__kicker kicker">
+      <span class="kicker-dot"></span>
+      <span data-lang-th="ประกันชีวิต · ความมั่นคง · อนาคต" data-lang-en="LIFE INSURANCE · SECURITY · THE FUTURE">ประกันชีวิต · ความมั่นคง · อนาคต</span>
+    </p>
+
+    <h1 class="hero__heading">
+      <span data-lang-th="คุ้มครองทุกช่วงชีวิต" data-lang-en="Protection for">คุ้มครองทุกช่วงชีวิต</span><br>
+      <em><span data-lang-th="อย่างที่คุณวางใจ" data-lang-en="Every Chapter of Life">อย่างที่คุณวางใจ</span></em>
+    </h1>
+
+    <p class="hero__body" data-lang-th="ด้วยประสบการณ์กว่า 38 ปี SST มอบความคุ้มครองชีวิตที่ครอบคลุม เพื่อให้คุณและครอบครัวใช้ชีวิตได้อย่างมั่นใจทุกวัน" data-lang-en="With over 38 years of expertise, SST delivers comprehensive life insurance so you and your family can live every day with absolute confidence.">ด้วยประสบการณ์กว่า 38 ปี SST มอบความคุ้มครองชีวิตที่ครอบคลุม เพื่อให้คุณและครอบครัวใช้ชีวิตได้อย่างมั่นใจทุกวัน</p>
+
+    <div class="hero__actions">
+      <a href="#products" class="btn btn--primary" data-lang-th="สำรวจแผนประกัน" data-lang-en="Explore Our Plans">สำรวจแผนประกัน</a>
+      <a href="#contact"  class="btn btn--ghost"   data-lang-th="พูดคุยกับที่ปรึกษา" data-lang-en="Speak to an Advisor">พูดคุยกับที่ปรึกษา</a>
+    </div>
+
+    <p class="hero__scroll">
+      <i data-lucide="chevron-down"></i>
+      <span data-lang-th="เลื่อนลงเพื่อดูข้อมูลเพิ่มเติม" data-lang-en="Scroll to explore">เลื่อนลงเพื่อดูข้อมูลเพิ่มเติม</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══ STATS ════════════════════════════════════════ -->
+<section class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-item__num">2.4M+</div>
+        <div class="stat-item__label" data-lang-th="ลูกค้าที่ไว้วางใจ" data-lang-en="Trusted Clients">ลูกค้าที่ไว้วางใจ</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-item__num">38</div>
+        <div class="stat-item__label" data-lang-th="ปีแห่งความเชี่ยวชาญ" data-lang-en="Years of Excellence">ปีแห่งความเชี่ยวชาญ</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-item__num">99.2%</div>
+        <div class="stat-item__label" data-lang-th="อัตราอนุมัติสินไหม" data-lang-en="Claims Approved">อัตราอนุมัติสินไหม</div>
+      </div>
+      <div class="stat-item reveal d3">
+        <div class="stat-item__num">AA+</div>
+        <div class="stat-item__label" data-lang-th="เรตติ้งทางการเงิน" data-lang-en="Financial Rating">เรตติ้งทางการเงิน</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__text reveal-left">
+        <span class="overline" data-lang-th="เกี่ยวกับเรา" data-lang-en="ABOUT SST">เกี่ยวกับเรา</span>
+        <h2 data-lang-th="เราเชื่อว่าทุกชีวิตมีคุณค่าที่ควรได้รับการคุ้มครอง" data-lang-en="Every Life Has Value Worth Protecting">เราเชื่อว่าทุกชีวิตมีคุณค่าที่ควรได้รับการคุ้มครอง</h2>
+        <p data-lang-th="SST ก่อตั้งขึ้นในปี 2530 ด้วยวิสัยทัศน์เดียว: มอบความมั่นคงทางการเงินให้กับคนไทยทุกคน เราไม่ใช่แค่บริษัทประกัน เราคือพันธมิตรที่คุณวางใจได้ในทุกช่วงชีวิต" data-lang-en="Founded in 1987 with a single vision — to provide financial security for every Thai family. We are not merely an insurance company. We are the partner you can trust at every stage of life.">SST ก่อตั้งขึ้นในปี 2530 ด้วยวิสัยทัศน์เดียว: มอบความมั่นคงทางการเงินให้กับคนไทยทุกคน เราไม่ใช่แค่บริษัทประกัน เราคือพันธมิตรที่คุณวางใจได้ในทุกช่วงชีวิต</p>
+        <p data-lang-th="ทีมที่ปรึกษาผู้เชี่ยวชาญของเรามีความเข้าใจในความต้องการที่แตกต่างกันของแต่ละครอบครัว ไม่ว่าคุณจะอยู่ในช่วงชีวิตใด เราพร้อมออกแบบแผนความคุ้มครองที่เหมาะสมกับคุณโดยเฉพาะ" data-lang-en="Our specialist advisory team understands that every family's needs are unique. Wherever you are in life, we design protection plans tailored specifically to you.">ทีมที่ปรึกษาผู้เชี่ยวชาญของเรามีความเข้าใจในความต้องการที่แตกต่างกันของแต่ละครอบครัว ไม่ว่าคุณจะอยู่ในช่วงชีวิตใด เราพร้อมออกแบบแผนความคุ้มครองที่เหมาะสมกับคุณโดยเฉพาะ</p>
+        <a href="#contact" class="btn btn--primary" data-lang-th="ปรึกษาผู้เชี่ยวชาญฟรี" data-lang-en="Free Consultation">ปรึกษาผู้เชี่ยวชาญฟรี</a>
+      </div>
+
+      <div class="about__img-wrap reveal-right">
+        <img
+          src="https://images.unsplash.com/photo-1758691031730-640885ad19e5?w=800&h=1000&fit=crop"
+          alt="คู่สามีภรรยาวางแผนการเงิน"
+          loading="lazy"
+        >
+        <div class="about__img-badge">
+          <div class="about__img-badge__num">38</div>
+          <div class="about__img-badge__label" data-lang-th="ปีแห่งความไว้วางใจ" data-lang-en="Years of Trust">ปีแห่งความไว้วางใจ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTS ═════════════════════════════════════ -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="products__header reveal">
+      <span class="overline" data-lang-th="แผนประกันของเรา" data-lang-en="OUR PLANS">แผนประกันของเรา</span>
+      <h2 data-lang-th="ความคุ้มครองที่ออกแบบมาเพื่อคุณ" data-lang-en="Coverage Designed Around You">ความคุ้มครองที่ออกแบบมาเพื่อคุณ</h2>
+    </div>
+  </div>
+
+  <!-- Product 1: Shield -->
+  <div class="prod-row">
+    <div class="prod-row__img">
+      <img
+        src="https://images.unsplash.com/photo-1648221350871-e3ae3c8d0f58?w=900&h=700&fit=crop"
+        alt="ครอบครัวยืนอยู่ในทุ่งหญ้าตอนพระอาทิตย์ตก"
+        loading="lazy"
+      >
+      <div class="prod-row__num">01</div>
+    </div>
+    <div class="prod-row__copy reveal">
+      <span class="prod-tag" data-lang-th="ประกันระยะสั้น" data-lang-en="TERM LIFE">ประกันระยะสั้น</span>
+      <h3 data-lang-th="SST Shield — คุ้มครองชีวิตระยะสั้น" data-lang-en="SST Shield — Term Life Insurance">SST Shield — คุ้มครองชีวิตระยะสั้น</h3>
+      <p data-lang-th="ความคุ้มครองที่ตรงจุด ในช่วงเวลาที่คุณต้องการที่สุด เหมาะสำหรับผู้ที่ต้องการปกป้องรายได้และวางแผนทางการเงินในระยะที่มีภาระผูกพัน" data-lang-en="Precise coverage for the duration you need most. Ideal for protecting income and managing financial obligations during your highest-responsibility years.">ความคุ้มครองที่ตรงจุด ในช่วงเวลาที่คุณต้องการที่สุด เหมาะสำหรับผู้ที่ต้องการปกป้องรายได้และวางแผนทางการเงินในระยะที่มีภาระผูกพัน</p>
+      <ul class="prod-features">
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="คุ้มครองสูงสุด 50 ล้านบาท" data-lang-en="Coverage up to 50M THB">คุ้มครองสูงสุด 50 ล้านบาท</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="เบี้ยประกันคงที่ตลอดสัญญา" data-lang-en="Fixed premiums throughout the term">เบี้ยประกันคงที่ตลอดสัญญา</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="ระยะเวลาคุ้มครอง 10–30 ปี" data-lang-en="10–30 year terms available">ระยะเวลาคุ้มครอง 10–30 ปี</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="สมัครได้อายุ 18–65 ปี" data-lang-en="Ages 18–65 eligible">สมัครได้อายุ 18–65 ปี</span></li>
+      </ul>
+      <a href="#contact" class="btn btn--primary" data-lang-th="ดูรายละเอียด" data-lang-en="Learn More">ดูรายละเอียด</a>
+    </div>
+  </div>
+
+  <!-- Product 2: Legacy -->
+  <div class="prod-row prod-row--rev">
+    <div class="prod-row__img">
+      <img
+        src="https://images.unsplash.com/photo-1486707471592-8e7eb7e36f78?w=900&h=700&fit=crop"
+        alt="ป่าไม้ในยามเช้ามืดที่สงบ"
+        loading="lazy"
+      >
+      <div class="prod-row__num">02</div>
+    </div>
+    <div class="prod-row__copy reveal">
+      <span class="prod-tag" data-lang-th="ประกันตลอดชีพ" data-lang-en="WHOLE LIFE">ประกันตลอดชีพ</span>
+      <h3 data-lang-th="SST Legacy — มรดกที่ยั่งยืน" data-lang-en="SST Legacy — A Lasting Legacy">SST Legacy — มรดกที่ยั่งยืน</h3>
+      <p data-lang-th="ความคุ้มครองที่ไม่มีวันสิ้นสุด พร้อมมูลค่าเงินสดที่เติบโตอย่างมั่นคง มอบมรดกทางการเงินที่แท้จริงให้กับคนที่คุณรัก" data-lang-en="Protection that never expires, with steadily growing cash value. A genuine financial legacy for those you love most.">ความคุ้มครองที่ไม่มีวันสิ้นสุด พร้อมมูลค่าเงินสดที่เติบโตอย่างมั่นคง มอบมรดกทางการเงินที่แท้จริงให้กับคนที่คุณรัก</p>
+      <ul class="prod-features">
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="คุ้มครองตลอดชีพถึงอายุ 99 ปี" data-lang-en="Lifetime coverage to age 99">คุ้มครองตลอดชีพถึงอายุ 99 ปี</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="มูลค่าเงินสดเพิ่มขึ้นทุกปี" data-lang-en="Annual cash value growth">มูลค่าเงินสดเพิ่มขึ้นทุกปี</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="ผลประโยชน์เสียชีวิต + คืนทุน" data-lang-en="Death benefit + return of premium">ผลประโยชน์เสียชีวิต + คืนทุน</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="สามารถกู้เงินกรมธรรม์ได้" data-lang-en="Policy loan available">สามารถกู้เงินกรมธรรม์ได้</span></li>
+      </ul>
+      <a href="#contact" class="btn btn--primary" data-lang-th="ดูรายละเอียด" data-lang-en="Learn More">ดูรายละเอียด</a>
+    </div>
+  </div>
+
+  <!-- Product 3: Guardian -->
+  <div class="prod-row">
+    <div class="prod-row__img">
+      <img
+        src="https://images.unsplash.com/photo-1560328055-e938bb2ed50a?w=900&h=700&fit=crop"
+        alt="พ่อและลูกชาย"
+        loading="lazy"
+      >
+      <div class="prod-row__num">03</div>
+    </div>
+    <div class="prod-row__copy reveal">
+      <span class="prod-tag" data-lang-th="คุ้มครองครอบครัว" data-lang-en="FAMILY PLAN">คุ้มครองครอบครัว</span>
+      <h3 data-lang-th="SST Guardian — ปกป้องทุกคนในครอบครัว" data-lang-en="SST Guardian — Whole Family Protection">SST Guardian — ปกป้องทุกคนในครอบครัว</h3>
+      <p data-lang-th="ดูแลทุกคนในครอบครัวด้วยแผนเดียว ครอบคลุมทั้งผู้ใหญ่และเด็ก พร้อมผลประโยชน์พิเศษที่ตอบโจทย์ทุกเหตุการณ์สำคัญในชีวิต" data-lang-en="Protect everyone under one plan, covering adults and children alike — with special benefits designed for life's most significant moments.">ดูแลทุกคนในครอบครัวด้วยแผนเดียว ครอบคลุมทั้งผู้ใหญ่และเด็ก พร้อมผลประโยชน์พิเศษที่ตอบโจทย์ทุกเหตุการณ์สำคัญในชีวิต</p>
+      <ul class="prod-features">
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="คุ้มครองสูงสุด 5 ชีวิตในครอบครัว" data-lang-en="Up to 5 family members covered">คุ้มครองสูงสุด 5 ชีวิตในครอบครัว</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="ผลประโยชน์พิเศษเมื่อมีบุตร" data-lang-en="Special newborn benefits">ผลประโยชน์พิเศษเมื่อมีบุตร</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="คุ้มครองอุบัติเหตุ 24 ชั่วโมง" data-lang-en="24-hour accident coverage">คุ้มครองอุบัติเหตุ 24 ชั่วโมง</span></li>
+        <li><i data-lucide="check" width="16" height="16"></i><span data-lang-th="บริการสุขภาพออนไลน์ฟรี" data-lang-en="Free online health services">บริการสุขภาพออนไลน์ฟรี</span></li>
+      </ul>
+      <a href="#contact" class="btn btn--primary" data-lang-th="ดูรายละเอียด" data-lang-en="Learn More">ดูรายละเอียด</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══════════════════════════════════════ -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="process__header reveal">
+      <span class="overline" data-lang-th="ขั้นตอนการสมัคร" data-lang-en="HOW IT WORKS">ขั้นตอนการสมัคร</span>
+      <h2 data-lang-th="เริ่มต้นได้ง่าย ใน 4 ขั้นตอน" data-lang-en="Get Covered in 4 Simple Steps">เริ่มต้นได้ง่าย ใน 4 ขั้นตอน</h2>
+    </div>
+
+    <div class="process__steps">
+      <div class="process__step reveal">
+        <div class="process__icon">
+          <i data-lucide="search" width="18" height="18"></i>
+          <span class="process__step-n">1</span>
+        </div>
+        <div class="process__step-body">
+          <h4 data-lang-th="เลือกแผนที่ใช่" data-lang-en="Choose Your Plan">เลือกแผนที่ใช่</h4>
+          <p data-lang-th="ปรึกษาผู้เชี่ยวชาญหรือใช้เครื่องมือเปรียบเทียบออนไลน์" data-lang-en="Consult a specialist or use our online comparison tool">ปรึกษาผู้เชี่ยวชาญหรือใช้เครื่องมือเปรียบเทียบออนไลน์</p>
+        </div>
+      </div>
+      <div class="process__step reveal d1">
+        <div class="process__icon">
+          <i data-lucide="clipboard-list" width="18" height="18"></i>
+          <span class="process__step-n">2</span>
+        </div>
+        <div class="process__step-body">
+          <h4 data-lang-th="กรอกข้อมูลสุขภาพ" data-lang-en="Complete Application">กรอกข้อมูลสุขภาพ</h4>
+          <p data-lang-th="แบบฟอร์มออนไลน์ง่ายๆ ใช้เวลาเพียง 10 นาที" data-lang-en="Simple online form — takes just 10 minutes">แบบฟอร์มออนไลน์ง่ายๆ ใช้เวลาเพียง 10 นาที</p>
+        </div>
+      </div>
+      <div class="process__step reveal d2">
+        <div class="process__icon">
+          <i data-lucide="clock" width="18" height="18"></i>
+          <span class="process__step-n">3</span>
+        </div>
+        <div class="process__step-body">
+          <h4 data-lang-th="รอการพิจารณา" data-lang-en="Await Review">รอการพิจารณา</h4>
+          <p data-lang-th="ทีมผู้เชี่ยวชาญแจ้งผลภายใน 24–48 ชั่วโมง" data-lang-en="Expert team notifies you within 24–48 hours">ทีมผู้เชี่ยวชาญแจ้งผลภายใน 24–48 ชั่วโมง</p>
+        </div>
+      </div>
+      <div class="process__step reveal d3">
+        <div class="process__icon">
+          <i data-lucide="shield-check" width="18" height="18"></i>
+          <span class="process__step-n">4</span>
+        </div>
+        <div class="process__step-body">
+          <h4 data-lang-th="ได้รับความคุ้มครองทันที" data-lang-en="Coverage Begins">ได้รับความคุ้มครองทันที</h4>
+          <p data-lang-th="ชำระเบี้ยและเริ่มรับความคุ้มครองในทันที" data-lang-en="Pay your premium and coverage starts immediately">ชำระเบี้ยและเริ่มรับความคุ้มครองในทันที</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═════════════════════════════════ -->
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials__header reveal">
+      <span class="overline" data-lang-th="เสียงจากลูกค้า" data-lang-en="CLIENT STORIES">เสียงจากลูกค้า</span>
+      <h2 data-lang-th="ความเชื่อมั่นที่สร้างมากว่า 38 ปี" data-lang-en="Trust Built Over 38 Years">ความเชื่อมั่นที่สร้างมากว่า 38 ปี</h2>
+    </div>
+  </div>
+
+  <div class="testi-track">
+    <div class="testi-card reveal">
+      <div class="testi-stars">
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+      </div>
+      <p class="testi-quote" data-lang-th="SST ช่วยให้ผมมั่นใจว่าครอบครัวจะได้รับการดูแลแม้ว่าจะเกิดเหตุไม่คาดฝัน ขั้นตอนง่ายมากและทีมงานดูแลดีมาก ผมแนะนำให้ทุกคนที่มีครอบครัวต้องทำ" data-lang-en="SST gives me confidence that my family will be cared for no matter what happens. The process was seamless and the team was exceptional. I recommend it to anyone with a family.">SST ช่วยให้ผมมั่นใจว่าครอบครัวจะได้รับการดูแลแม้ว่าจะเกิดเหตุไม่คาดฝัน ขั้นตอนง่ายมากและทีมงานดูแลดีมาก ผมแนะนำให้ทุกคนที่มีครอบครัวต้องทำ</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1639242210298-27861f84eab1?w=100&h=100&fit=crop&crop=face" alt="คุณสมชาย วงศ์ไพศาล">
+        <div>
+          <strong class="testi-author__name">คุณสมชาย วงศ์ไพศาล</strong>
+          <span class="testi-author__role" data-lang-th="ผู้ประกอบการ, อายุ 45 ปี" data-lang-en="Entrepreneur, Age 45">ผู้ประกอบการ, อายุ 45 ปี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal d1">
+      <div class="testi-stars">
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+      </div>
+      <p class="testi-quote" data-lang-th="ในฐานะแพทย์ที่เข้าใจความสำคัญของการวางแผนอนาคต SST คือตัวเลือกที่ดีที่สุดสำหรับครอบครัวของฉัน ความโปร่งใสและความน่าเชื่อถือของ SST ทำให้ฉันวางใจได้อย่างเต็มที่" data-lang-en="As a doctor who understands the importance of planning for the future, SST is the best choice for my family. Their transparency and reliability give me complete peace of mind.">ในฐานะแพทย์ที่เข้าใจความสำคัญของการวางแผนอนาคต SST คือตัวเลือกที่ดีที่สุดสำหรับครอบครัวของฉัน ความโปร่งใสและความน่าเชื่อถือของ SST ทำให้ฉันวางใจได้อย่างเต็มที่</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1696960181436-1b6d9576354e?w=100&h=100&fit=crop&crop=face" alt="คุณนภาพร มิตรชัย">
+        <div>
+          <strong class="testi-author__name">คุณนภาพร มิตรชัย</strong>
+          <span class="testi-author__role" data-lang-th="แพทย์, อายุ 38 ปี" data-lang-en="Physician, Age 38">แพทย์, อายุ 38 ปี</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal d2">
+      <div class="testi-stars">
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+        <i data-lucide="star" width="14" height="14"></i>
+      </div>
+      <p class="testi-quote" data-lang-th="ผมใช้บริการ SST มาเกือบ 15 ปีแล้ว ทั้งความโปร่งใสและความน่าเชื่อถือทำให้ผมแนะนำ SST ให้กับเพื่อนและครอบครัวทุกคน ไม่เคยผิดหวังเลยสักครั้ง" data-lang-en="I have been with SST for nearly 15 years. Their transparency and reliability make them my top recommendation to every friend and family member. Not once have I been disappointed.">ผมใช้บริการ SST มาเกือบ 15 ปีแล้ว ทั้งความโปร่งใสและความน่าเชื่อถือทำให้ผมแนะนำ SST ให้กับเพื่อนและครอบครัวทุกคน ไม่เคยผิดหวังเลยสักครั้ง</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1658668369592-035afd5fa142?w=100&h=100&fit=crop&crop=face" alt="คุณวิชัย ธรรมสาร">
+        <div>
+          <strong class="testi-author__name">คุณวิชัย ธรรมสาร</strong>
+          <span class="testi-author__role" data-lang-th="วิศวกร, อายุ 52 ปี" data-lang-en="Engineer, Age 52">วิศวกร, อายุ 52 ปี</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══════════════════════════════════════════ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq__layout">
+      <div class="faq__aside reveal-left">
+        <span class="overline" data-lang-th="คำถามที่พบบ่อย" data-lang-en="FAQ">คำถามที่พบบ่อย</span>
+        <h2 data-lang-th="มีคำถาม? เราพร้อมตอบ" data-lang-en="Have Questions? We Have Answers.">มีคำถาม? เราพร้อมตอบ</h2>
+        <p data-lang-th="หากไม่พบคำตอบที่ต้องการ ทีมที่ปรึกษาของเราพร้อมช่วยเหลือคุณตลอดเวลา" data-lang-en="If you can't find what you're looking for, our advisory team is always ready to help.">หากไม่พบคำตอบที่ต้องการ ทีมที่ปรึกษาของเราพร้อมช่วยเหลือคุณตลอดเวลา</p>
+        <a href="#contact" class="btn btn--ghost" data-lang-th="ติดต่อที่ปรึกษา" data-lang-en="Talk to an Advisor">ติดต่อที่ปรึกษา</a>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-btn">
+            <span data-lang-th="SST ให้ความคุ้มครองอะไรบ้าง?" data-lang-en="What does SST cover?">SST ให้ความคุ้มครองอะไรบ้าง?</span>
+            <i data-lucide="plus" width="18" height="18"></i>
+          </button>
+          <div class="faq-answer"><div class="faq-answer__inner" data-lang-th="SST ให้ความคุ้มครองที่ครอบคลุมทั้งกรณีเสียชีวิต ทุพพลภาพถาวร โรคร้ายแรง และอุบัติเหตุ แต่ละแผนมีรายละเอียดที่แตกต่างกัน ที่ปรึกษาของเราพร้อมอธิบายทุกเรื่องที่คุณต้องการทราบ" data-lang-en="SST provides comprehensive coverage for death, permanent disability, critical illness, and accidents. Each plan has distinct coverage details — our advisors are ready to explain everything you need to know.">SST ให้ความคุ้มครองที่ครอบคลุมทั้งกรณีเสียชีวิต ทุพพลภาพถาวร โรคร้ายแรง และอุบัติเหตุ แต่ละแผนมีรายละเอียดที่แตกต่างกัน ที่ปรึกษาของเราพร้อมอธิบายทุกเรื่องที่คุณต้องการทราบ</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn">
+            <span data-lang-th="วงเงินคุ้มครองสูงสุดเท่าไร?" data-lang-en="What is the maximum coverage amount?">วงเงินคุ้มครองสูงสุดเท่าไร?</span>
+            <i data-lucide="plus" width="18" height="18"></i>
+          </button>
+          <div class="faq-answer"><div class="faq-answer__inner" data-lang-th="แผน SST Shield ให้ความคุ้มครองสูงสุดถึง 50 ล้านบาท วงเงินขึ้นอยู่กับรายได้และสุขภาพของผู้สมัคร เราจะช่วยประเมินวงเงินที่เหมาะสมสำหรับคุณโดยเฉพาะ" data-lang-en="The SST Shield plan offers coverage up to 50 million THB, depending on income and health status. We will help assess the right amount specifically for your situation.">แผน SST Shield ให้ความคุ้มครองสูงสุดถึง 50 ล้านบาท วงเงินขึ้นอยู่กับรายได้และสุขภาพของผู้สมัคร เราจะช่วยประเมินวงเงินที่เหมาะสมสำหรับคุณโดยเฉพาะ</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn">
+            <span data-lang-th="ขั้นตอนการเรียกร้องสินไหมทำอย่างไร?" data-lang-en="How do I file a claim?">ขั้นตอนการเรียกร้องสินไหมทำอย่างไร?</span>
+            <i data-lucide="plus" width="18" height="18"></i>
+          </button>
+          <div class="faq-answer"><div class="faq-answer__inner" data-lang-th="เมื่อเกิดเหตุ ติดต่อ SST ผ่านสายด่วน 1387 หรือแอปพลิเคชันได้ตลอด 24 ชั่วโมง ทีมงานจะแนะนำเอกสารที่ต้องใช้ โดยส่วนใหญ่เสร็จสิ้นภายใน 7 วันทำการ" data-lang-en="In the event of a claim, contact SST via hotline 1387 or our app, available 24/7. Our team will guide you through required documents. Most claims are completed within 7 business days.">เมื่อเกิดเหตุ ติดต่อ SST ผ่านสายด่วน 1387 หรือแอปพลิเคชันได้ตลอด 24 ชั่วโมง ทีมงานจะแนะนำเอกสารที่ต้องใช้ โดยส่วนใหญ่เสร็จสิ้นภายใน 7 วันทำการ</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn">
+            <span data-lang-th="มีเงื่อนไขด้านสุขภาพอะไรบ้าง?" data-lang-en="Are there health eligibility conditions?">มีเงื่อนไขด้านสุขภาพอะไรบ้าง?</span>
+            <i data-lucide="plus" width="18" height="18"></i>
+          </button>
+          <div class="faq-answer"><div class="faq-answer__inner" data-lang-th="ผู้สมัครต้องมีอายุระหว่าง 18–70 ปีและผ่านการประเมินสุขภาพเบื้องต้น โรคที่เป็นมาก่อนสมัครอาจมีการยกเว้นบางเงื่อนไข ที่ปรึกษาของเราจะอธิบายรายละเอียดอย่างชัดเจน" data-lang-en="Applicants must be between 18–70 years of age and pass a basic health assessment. Pre-existing conditions may have certain exclusions — our advisors will explain all details clearly.">ผู้สมัครต้องมีอายุระหว่าง 18–70 ปีและผ่านการประเมินสุขภาพเบื้องต้น โรคที่เป็นมาก่อนสมัครอาจมีการยกเว้นบางเงื่อนไข ที่ปรึกษาของเราจะอธิบายรายละเอียดอย่างชัดเจน</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn">
+            <span data-lang-th="สามารถซื้อประกันออนไลน์ได้หรือไม่?" data-lang-en="Can I purchase insurance online?">สามารถซื้อประกันออนไลน์ได้หรือไม่?</span>
+            <i data-lucide="plus" width="18" height="18"></i>
+          </button>
+          <div class="faq-answer"><div class="faq-answer__inner" data-lang-th="ได้เลยครับ แผน SST Shield และ SST Guardian สามารถสมัครออนไลน์ได้ทันที สำหรับ SST Legacy แนะนำให้พบที่ปรึกษาเพื่อวางแผนที่ตรงกับเป้าหมายทางการเงินของคุณ" data-lang-en="Yes — SST Shield and SST Guardian can be applied for entirely online. For SST Legacy, we recommend meeting an advisor to align the plan with your specific financial goals.">ได้เลยครับ แผน SST Shield และ SST Guardian สามารถสมัครออนไลน์ได้ทันที สำหรับ SST Legacy แนะนำให้พบที่ปรึกษาเพื่อวางแผนที่ตรงกับเป้าหมายทางการเงินของคุณ</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BAND ══════════════════════════════════════ -->
+<section class="cta-band">
+  <div class="cta-band__bg"></div>
+  <div class="cta-band__content reveal">
+    <span class="overline" data-lang-th="เริ่มต้นวันนี้" data-lang-en="START TODAY">เริ่มต้นวันนี้</span>
+    <h2 data-lang-th="พร้อมเริ่มต้นสู่ชีวิตที่มั่นคงแล้วหรือยัง?" data-lang-en="Ready to Secure Your Future?">พร้อมเริ่มต้นสู่ชีวิตที่มั่นคงแล้วหรือยัง?</h2>
+    <p data-lang-th="ที่ปรึกษาผู้เชี่ยวชาญของเราพร้อมช่วยคุณเลือกแผนที่เหมาะสมที่สุด ไม่มีค่าใช้จ่ายในการปรึกษา" data-lang-en="Our specialist advisors are ready to help you choose the most suitable plan — no charge for consultations.">ที่ปรึกษาผู้เชี่ยวชาญของเราพร้อมช่วยคุณเลือกแผนที่เหมาะสมที่สุด ไม่มีค่าใช้จ่ายในการปรึกษา</p>
+    <div class="cta-band__btns">
+      <a href="#contact" class="btn btn--ice" data-lang-th="รับคำปรึกษาฟรี" data-lang-en="Get Free Consultation">รับคำปรึกษาฟรี</a>
+      <a href="tel:1387" class="btn btn--ghost">
+        <i data-lucide="phone" width="16" height="16"></i>
+        <span data-lang-th="โทร 1387" data-lang-en="Call 1387">โทร 1387</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact__grid">
+      <div class="contact__info reveal-left">
+        <span class="overline" data-lang-th="ติดต่อเรา" data-lang-en="CONTACT US">ติดต่อเรา</span>
+        <h2 data-lang-th="เราพร้อมช่วยเหลือคุณ" data-lang-en="We Are Here to Help">เราพร้อมช่วยเหลือคุณ</h2>
+        <p data-lang-th="ส่งข้อความหาเราหรือติดต่อโดยตรง ทีมที่ปรึกษาของเราพร้อมให้คำแนะนำอย่างตรงไปตรงมา ไม่มีค่าใช้จ่าย ไม่มีข้อผูกมัด" data-lang-en="Send us a message or reach out directly. Our advisory team provides honest guidance — no charge, no obligation.">ส่งข้อความหาเราหรือติดต่อโดยตรง ทีมที่ปรึกษาของเราพร้อมให้คำแนะนำอย่างตรงไปตรงมา ไม่มีค่าใช้จ่าย ไม่มีข้อผูกมัด</p>
+        <div class="contact-detail-list">
+          <div class="contact-detail">
+            <i data-lucide="map-pin" width="18" height="18"></i>
+            <span data-lang-th="เลขที่ 88 อาคาร SST ถนนรัชดาภิเษก แขวงห้วยขวาง กรุงเทพฯ 10310" data-lang-en="88 SST Building, Ratchadaphisek Road, Huai Khwang, Bangkok 10310">เลขที่ 88 อาคาร SST ถนนรัชดาภิเษก แขวงห้วยขวาง กรุงเทพฯ 10310</span>
+          </div>
+          <div class="contact-detail">
+            <i data-lucide="phone" width="18" height="18"></i>
+            <span>1387</span>
+          </div>
+          <div class="contact-detail">
+            <i data-lucide="mail" width="18" height="18"></i>
+            <span>hello@sst-life.th</span>
+          </div>
+          <div class="contact-detail">
+            <i data-lucide="clock" width="18" height="18"></i>
+            <span data-lang-th="จันทร์–ศุกร์ 08:30–17:30 น." data-lang-en="Mon–Fri 08:30–17:30">จันทร์–ศุกร์ 08:30–17:30 น.</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-lang-th="ชื่อ-นามสกุล" data-lang-en="Full Name">ชื่อ-นามสกุล</label>
+            <input type="text" placeholder="" autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label data-lang-th="เบอร์โทรศัพท์" data-lang-en="Phone Number">เบอร์โทรศัพท์</label>
+            <input type="tel" placeholder="" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-lang-th="อีเมล" data-lang-en="Email Address">อีเมล</label>
+          <input type="email" placeholder="" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label data-lang-th="แผนที่สนใจ" data-lang-en="Plan of Interest">แผนที่สนใจ</label>
+          <select>
+            <option value="" data-lang-th="เลือกแผนประกัน" data-lang-en="Select a plan">เลือกแผนประกัน</option>
+            <option value="shield">SST Shield</option>
+            <option value="legacy">SST Legacy</option>
+            <option value="guardian">SST Guardian</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label data-lang-th="ข้อความ" data-lang-en="Message">ข้อความ</label>
+          <textarea rows="4" placeholder=""></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%">
+          <i data-lucide="send" width="16" height="16"></i>
+          <span data-lang-th="ส่งข้อความ" data-lang-en="Send Message">ส่งข้อความ</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="logo">SS<span>T</span></span>
+        <p data-lang-th="มอบความมั่นคงให้ทุกชีวิตไทย ด้วยความเชี่ยวชาญกว่า 38 ปี" data-lang-en="Delivering security to every Thai life for over 38 years.">มอบความมั่นคงให้ทุกชีวิตไทย ด้วยความเชี่ยวชาญกว่า 38 ปี</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook" width="15" height="15"></i></a>
+          <a href="#" aria-label="Line"><i data-lucide="message-circle" width="15" height="15"></i></a>
+          <a href="#" aria-label="YouTube"><i data-lucide="youtube" width="15" height="15"></i></a>
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram" width="15" height="15"></i></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h5 data-lang-th="แผนประกัน" data-lang-en="PLANS">แผนประกัน</h5>
+        <ul>
+          <li><a href="#products" data-lang-th="SST Shield" data-lang-en="SST Shield">SST Shield</a></li>
+          <li><a href="#products" data-lang-th="SST Legacy" data-lang-en="SST Legacy">SST Legacy</a></li>
+          <li><a href="#products" data-lang-th="SST Guardian" data-lang-en="SST Guardian">SST Guardian</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5 data-lang-th="บริษัท" data-lang-en="COMPANY">บริษัท</h5>
+        <ul>
+          <li><a href="#about"   data-lang-th="เกี่ยวกับเรา" data-lang-en="About Us">เกี่ยวกับเรา</a></li>
+          <li><a href="#process" data-lang-th="ขั้นตอน"      data-lang-en="How it Works">ขั้นตอน</a></li>
+          <li><a href="#faq"     data-lang-th="คำถามที่พบบ่อย" data-lang-en="FAQ">คำถามที่พบบ่อย</a></li>
+          <li><a href="#contact" data-lang-th="ติดต่อเรา"    data-lang-en="Contact">ติดต่อเรา</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5 data-lang-th="ข้อมูลกฎหมาย" data-lang-en="LEGAL">ข้อมูลกฎหมาย</h5>
+        <ul>
+          <li><a href="#" data-lang-th="นโยบายความเป็นส่วนตัว" data-lang-en="Privacy Policy">นโยบายความเป็นส่วนตัว</a></li>
+          <li><a href="#" data-lang-th="เงื่อนไขการใช้งาน" data-lang-en="Terms of Use">เงื่อนไขการใช้งาน</a></li>
+          <li><a href="#" data-lang-th="คำบอกกล่าวทางกฎหมาย" data-lang-en="Legal Notice">คำบอกกล่าวทางกฎหมาย</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p data-lang-th="© 2568 SST ประกันชีวิต จำกัด. สงวนสิทธิ์ทั้งหมด" data-lang-en="© 2025 SST Life Insurance Co., Ltd. All rights reserved.">© 2568 SST ประกันชีวิต จำกัด. สงวนสิทธิ์ทั้งหมด</p>
+      <p data-lang-th="ได้รับใบอนุญาตจาก คปภ. เลขที่ 0305/2530" data-lang-en="Licensed by OIC. License No. 0305/1987">ได้รับใบอนุญาตจาก คปภ. เลขที่ 0305/2530</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Nav: solid on scroll ─────────────────────── */
+  (function () {
+    var nav = document.getElementById('site-nav');
+    function update() {
+      if (window.scrollY > 60) nav.classList.add('solid');
+      else nav.classList.remove('solid');
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  /* ── Hamburger ─────────────────────────────────── */
+  (function () {
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('mob-menu');
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      menu.setAttribute('aria-hidden', String(!open));
+    });
+    document.querySelectorAll('.mob-menu__inner a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+      });
+    });
+  })();
+
+  /* ── Scroll-reveal (IntersectionObserver) ─────── */
+  (function () {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function (el) {
+      io.observe(el);
+    });
+  })();
+
+  /* ── FAQ accordion ────────────────────────────── */
+  (function () {
+    document.querySelectorAll('.faq-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.faq-item');
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (i) {
+          i.classList.remove('open');
+        });
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+  })();
+</script>
+
+<!-- ── Language switcher (exact required script) ── -->
+<script>
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){e.textContent=t}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
+</script>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

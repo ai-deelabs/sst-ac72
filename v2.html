@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SST ประกันชีวิต — ความมั่นคงที่คุณไว้วางใจ</title>
+<meta name="description" content="SST ประกันชีวิต ให้ความคุ้มครองที่ครอบคลุมสำหรับคุณและครอบครัว ด้วยประสบการณ์กว่า 60 ปี">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --paper:#F5F0E8;
+  --paper-2:#EDE8DF;
+  --ink:#1C1C1C;
+  --ink-2:#4A4A4A;
+  --sienna:#B85C2A;
+  --sienna-dark:#9A4A20;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans Thai','Sukhumvit Set',sans-serif;
+  line-height:1.8;
+  word-break:break-word;
+  overflow-wrap:break-word;
+  overflow-x:hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4{
+  font-family:'Playfair Display','Georgia',serif;
+  line-height:1.5;
+  color:var(--ink);
+}
+
+/* letter-spacing only for English mode */
+html[lang="en"] .en-track{letter-spacing:0.12em}
+html[lang="en"] .nav-link{letter-spacing:0.08em}
+html[lang="en"] .stat-lbl{letter-spacing:0.1em}
+html[lang="en"] .col-title{letter-spacing:0.1em}
+html[lang="en"] .issue-txt{letter-spacing:0.06em}
+html[lang="en"] .eyebrow-txt{letter-spacing:0.14em}
+
+.section-label{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
+.section-label__line{width:32px;height:2px;background:var(--sienna);flex-shrink:0}
+.section-title{font-family:'Playfair Display','Georgia',serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;line-height:1.3;margin-bottom:1.5rem}
+
+.label-tag{
+  display:inline-block;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+  font-size:0.72rem;
+  font-weight:600;
+  text-transform:uppercase;
+  color:var(--sienna);
+}
+
+.ruled-hr{width:100%;border:none;height:1px;background:var(--sienna)}
+.ruled-triple{border:none;height:7px;background:
+  linear-gradient(var(--sienna),var(--sienna)) 0 0/100% 1px no-repeat,
+  linear-gradient(var(--sienna),var(--sienna)) 0 3px/100% 1px no-repeat,
+  linear-gradient(var(--sienna),var(--sienna)) 0 6px/48px 1px no-repeat}
+
+/* ── LAYOUT ── */
+.container{width:100%;max-width:980px;margin:0 auto;padding:0 1.25rem}
+
+/* ── NAVBAR ── */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--paper);
+  border-bottom:1px solid var(--sienna);
+  transition:padding .3s,box-shadow .3s;
+  padding:.85rem 1.25rem;
+}
+.navbar.scrolled{padding:.5rem 1.25rem;box-shadow:0 2px 18px rgba(28,28,28,.1)}
+.navbar__inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:var(--ink);text-decoration:none}
+.nav-logo span{color:var(--sienna)}
+.nav-links{display:none;list-style:none;gap:2rem;align-items:center}
+.nav-links a{
+  font-size:.78rem;font-weight:600;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;
+  transition:color .2s;padding:.5rem 0;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+}
+html[lang="en"] .nav-links a{letter-spacing:.08em}
+.nav-links a:hover{color:var(--sienna)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+
+.lang-sw{
+  display:flex;align-items:center;gap:.3rem;
+  font-size:.75rem;font-weight:600;text-transform:uppercase;
+  color:var(--ink-2);background:none;border:none;padding:.35rem .5rem;
+  cursor:pointer;transition:color .2s;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+}
+.lang-sw:hover{color:var(--sienna)}
+.lang-sw svg{width:14px;height:14px;flex-shrink:0}
+
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:.35rem;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.m-nav{
+  position:fixed;inset:0;background:var(--paper);z-index:199;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.m-nav.open{opacity:1;pointer-events:auto}
+.m-nav__list{list-style:none;text-align:center}
+.m-nav__list li{margin-bottom:1.4rem}
+.m-nav__list a{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--ink);text-decoration:none;transition:color .2s}
+.m-nav__list a:hover{color:var(--sienna)}
+.m-nav__close{position:absolute;top:1.1rem;right:1.4rem;background:none;border:none;cursor:pointer;padding:.4rem;color:var(--ink)}
+
+/* ── HERO ── */
+.hero{padding-top:4.2rem;min-height:100svh;display:flex;flex-direction:column;position:relative}
+.hero__bar{
+  border-bottom:1px solid rgba(28,28,28,.18);
+  padding:.45rem 1.25rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.5rem;
+}
+.issue-txt{
+  font-size:.68rem;font-weight:500;text-transform:uppercase;
+  color:var(--ink-2);font-family:'IBM Plex Sans Thai',sans-serif;
+}
+.hero__body{
+  flex:1;display:flex;flex-direction:column;
+  padding:2rem 1.25rem 3rem;max-width:1000px;margin:0 auto;width:100%;
+}
+.hero__eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.hero__ey-line{width:40px;height:2px;background:var(--sienna)}
+.eyebrow-txt{font-family:'IBM Plex Sans Thai',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--sienna)}
+.hero__h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,9vw,6rem);
+  font-weight:800;line-height:1.1;margin-bottom:1.5rem;
+}
+.hero__h1 em{font-style:italic;color:var(--sienna)}
+.hero__img-wrap{
+  position:relative;width:100%;overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 91%,0 100%);
+  margin-bottom:.5rem;
+}
+.hero__img{
+  width:100%;height:260px;object-fit:cover;display:block;
+  filter:sepia(25%) contrast(1.08) brightness(.97);
+  transition:transform 9s ease;
+}
+.hero__img:hover{transform:scale(1.04)}
+.hero__caption{
+  position:absolute;bottom:12%;left:0;
+  background:rgba(28,28,28,.72);color:var(--paper);
+  font-size:.65rem;padding:.4rem .75rem;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+}
+.hero__pq{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.1rem,2.8vw,1.5rem);
+  font-style:italic;line-height:1.7;
+  border-left:3px solid var(--sienna);
+  padding:.8rem 1.2rem;margin:1.5rem 0;
+  color:var(--ink-2);
+}
+.hero__cta{display:flex;flex-direction:column;gap:.75rem;align-items:flex-start}
+.btn-p{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--sienna);color:#fff;
+  font-family:'IBM Plex Sans Thai',sans-serif;font-size:.9rem;font-weight:600;
+  text-decoration:none;padding:.85em 1.8em;border:2px solid var(--sienna);
+  cursor:pointer;transition:background .25s,color .25s,transform .2s;
+  min-height:44px;border-radius:0;
+}
+.btn-p:hover{background:transparent;color:var(--sienna);transform:translateY(-2px)}
+.btn-o{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--ink);
+  font-family:'IBM Plex Sans Thai',sans-serif;font-size:.9rem;font-weight:500;
+  text-decoration:none;padding:.85em 1.8em;border:1.5px solid var(--ink);
+  cursor:pointer;transition:all .25s;min-height:44px;border-radius:0;
+}
+.btn-o:hover{border-color:var(--sienna);color:var(--sienna);transform:translateY(-2px)}
+
+/* ── STATS ── */
+.stats-bar{background:var(--ink);color:var(--paper);padding:2rem 1.25rem}
+.stats-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 1rem}
+.stat{text-align:center}
+.stat__n{
+  font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:800;
+  color:var(--paper);font-variant-numeric:tabular-nums;line-height:1.1;
+}
+.stat__n span{color:var(--sienna)}
+.stat-lbl{
+  font-size:.7rem;text-transform:uppercase;
+  color:rgba(245,240,232,.55);margin-top:.2rem;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+}
+
+/* ── SECTION GENERIC ── */
+section{padding:4rem 1.25rem}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+.about-img{
+  width:100%;height:300px;object-fit:cover;display:block;
+  filter:sepia(20%) contrast(1.06);
+}
+.about-img-wrap{position:relative;overflow:hidden}
+.about-img-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(28,28,28,.7);color:var(--paper);
+  font-size:.65rem;padding:.4rem .7rem;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+}
+.about-text{font-size:1rem;line-height:1.95;color:var(--ink-2);margin-bottom:1.2rem}
+.pull-q{
+  font-family:'Playfair Display',serif;font-size:clamp(1.15rem,3vw,1.45rem);
+  font-style:italic;line-height:1.65;
+  border-top:1px solid var(--sienna);border-bottom:1px solid var(--sienna);
+  padding:1.1rem 0;margin:1.4rem 0;color:var(--ink);
+}
+
+/* ── PRODUCTS ── */
+.products-sec{background:var(--ink);color:var(--paper)}
+.products-sec .section-title{color:var(--paper)}
+.products-sec .label-tag{color:rgba(245,240,232,.75)}
+.products-sec .section-label__line{background:var(--sienna)}
+
+.acc{margin-top:2rem}
+.acc-item{border-top:1px solid rgba(245,240,232,.14)}
+.acc-item:last-child{border-bottom:1px solid rgba(245,240,232,.14)}
+.acc-hd{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.3rem 0;cursor:pointer;
+}
+.acc-num{
+  font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;
+  color:var(--sienna);font-variant-numeric:tabular-nums;
+  line-height:1.2;min-width:2rem;flex-shrink:0;padding-top:.1rem;
+}
+.acc-title{
+  font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;
+  color:var(--paper);flex:1;line-height:1.5;
+}
+.acc-ico{color:var(--sienna);flex-shrink:0;transition:transform .3s;margin-top:.15rem}
+.acc-item.active .acc-ico{transform:rotate(45deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-item.active .acc-body{max-height:500px}
+.acc-cnt{padding:0 0 1.5rem 3.2rem;color:rgba(245,240,232,.8);font-size:.93rem;line-height:1.9}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.badge{
+  border:1px solid var(--sienna);color:var(--sienna);
+  padding:.45em .8em;font-size:.73rem;font-weight:500;
+  font-family:'IBM Plex Sans Thai',sans-serif;line-height:1.6;
+}
+
+/* ── WHY TRUST ── */
+.trust-rows{margin-top:2rem}
+.trust-row{
+  display:grid;grid-template-columns:1fr;gap:1rem;
+  padding:2rem 0;border-top:1px solid rgba(28,28,28,.14);
+}
+.trust-row:last-child{border-bottom:1px solid rgba(28,28,28,.14)}
+.trust-num{
+  font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;
+  color:var(--sienna);line-height:1;font-variant-numeric:tabular-nums;
+}
+.trust-row h3{font-size:1.1rem;margin-bottom:.45rem;line-height:1.45}
+.trust-row p{font-size:.93rem;color:var(--ink-2);line-height:1.9}
+
+/* ── PROCESS ── */
+.process-bg{background:var(--paper-2)}
+.proc-steps{margin-top:2rem}
+.proc-step{
+  display:grid;grid-template-columns:3rem 1fr;gap:1.1rem;
+  padding:1.4rem 0;border-top:1px solid rgba(28,28,28,.12);
+  align-items:start;
+}
+.proc-step:last-child{border-bottom:1px solid rgba(28,28,28,.12)}
+.proc-num{
+  font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;
+  color:var(--sienna);line-height:1;font-variant-numeric:tabular-nums;
+}
+.proc-title{font-size:1.05rem;font-weight:600;margin-bottom:.3rem;line-height:1.5}
+.proc-desc{font-size:.9rem;color:var(--ink-2);line-height:1.9}
+
+/* ── TESTIMONIALS ── */
+.testi-bg{background:var(--paper)}
+.testi-list{margin-top:2.5rem}
+.testi{padding:2rem 0;border-top:1px solid rgba(28,28,28,.14)}
+.testi:last-child{border-bottom:1px solid rgba(28,28,28,.14)}
+.testi-q{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.2rem,3vw,1.6rem);
+  font-style:italic;line-height:1.65;
+  color:var(--ink);margin-bottom:1.2rem;
+}
+.testi-q::before{
+  content:'\201C';color:var(--sienna);font-size:2.2rem;
+  line-height:0;vertical-align:-.45em;margin-right:.1em;
+}
+.testi-meta{display:flex;align-items:center;gap:.9rem}
+.testi-av{
+  width:44px;height:44px;border-radius:50%;
+  object-fit:cover;filter:sepia(20%);flex-shrink:0;
+}
+.testi-name{font-weight:600;font-size:.88rem}
+.testi-role{font-size:.75rem;color:var(--ink-2);margin-top:.05rem}
+
+/* ── CTA ── */
+.cta-sec{background:var(--sienna);color:#fff;text-align:center;padding:4rem 1.25rem}
+.cta-sec .section-title{color:#fff;margin-bottom:.9rem}
+.cta-sec p{font-size:.97rem;line-height:1.9;opacity:.92;margin-bottom:2rem}
+.cta-sec .btn-p{background:#fff;color:var(--sienna);border-color:#fff}
+.cta-sec .btn-p:hover{background:transparent;color:#fff}
+.cta-sec .btn-o{border-color:rgba(255,255,255,.7);color:#fff}
+.cta-sec .btn-o:hover{border-color:#fff;color:#fff}
+.cta-inner{max-width:680px;margin:0 auto}
+.cta-label-line{width:32px;height:2px;background:rgba(255,255,255,.45)}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);color:var(--paper);padding:3rem 1.25rem}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:2.5rem}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:var(--paper);margin-bottom:.7rem}
+.f-logo span{color:var(--sienna)}
+.f-desc{font-size:.85rem;color:rgba(245,240,232,.6);line-height:1.9}
+.f-social{display:flex;gap:.9rem;margin-top:1.1rem}
+.f-social a{color:rgba(245,240,232,.45);transition:color .2s}
+.f-social a:hover{color:var(--sienna)}
+.col-title{
+  font-family:'Playfair Display',serif;font-size:.82rem;font-weight:600;
+  color:var(--sienna);text-transform:uppercase;margin-bottom:.9rem;
+}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.f-links a{
+  font-size:.84rem;color:rgba(245,240,232,.65);text-decoration:none;
+  transition:color .2s;line-height:1.65;display:flex;align-items:center;gap:.45rem;
+}
+.f-links a:hover{color:var(--sienna)}
+.footer-bottom{
+  border-top:1px solid rgba(245,240,232,.12);padding-top:1.5rem;
+  display:flex;flex-direction:column;gap:.45rem;align-items:center;text-align:center;
+}
+.footer-bottom p{font-size:.72rem;color:rgba(245,240,232,.35)}
+
+/* ── DECORATIVE ── */
+.deco-rule{
+  display:flex;align-items:center;gap:1rem;margin:1rem 0 2rem;
+}
+.deco-rule::before,.deco-rule::after{
+  content:'';flex:1;height:1px;background:rgba(28,28,28,.15);
+}
+.deco-rule span{
+  font-family:'Playfair Display',serif;font-size:.65rem;
+  color:var(--sienna);letter-spacing:.15em;text-transform:uppercase;
+  font-variant:small-caps;
+}
+
+/* diagonal geometric accent */
+.geo-accent{
+  position:absolute;top:0;right:0;
+  width:80px;height:80px;
+  border-top:3px solid var(--sienna);
+  border-right:3px solid var(--sienna);
+  opacity:.25;
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease-out,transform .6s ease-out}
+.rv.vi{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}
+.rv.d2{transition-delay:.2s}
+.rv.d3{transition-delay:.3s}
+
+/* ── RESPONSIVE ── */
+@media(min-width:768px){
+  .nav-links{display:flex}
+  .hamburger{display:none}
+  .hero__img{height:420px}
+  .hero__cta{flex-direction:row;align-items:center}
+  .stats-inner{grid-template-columns:repeat(4,1fr)}
+  .about-grid{grid-template-columns:1fr 1fr;align-items:start}
+  .about-img{height:420px}
+  .trust-row{grid-template-columns:80px 1fr;align-items:start}
+  .trust-num{font-size:3.5rem}
+  .footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}
+  .footer-bottom{flex-direction:row;justify-content:space-between;text-align:left}
+  .hero__pq{max-width:600px}
+}
+@media(min-width:1024px){
+  .hero__h1{font-size:5.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="#" class="nav-logo">SST<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a></li>
+      <li><a href="#products" class="nav-link" data-lang-th="แผนประกัน" data-lang-en="Plans">แผนประกัน</a></li>
+      <li><a href="#process" class="nav-link" data-lang-th="ขั้นตอน" data-lang-en="Process">ขั้นตอน</a></li>
+      <li><a href="#testimonials" class="nav-link" data-lang-th="ลูกค้า" data-lang-en="Clients">ลูกค้า</a></li>
+      <li><a href="#contact" class="nav-link" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="lang-sw" aria-label="Toggle language">
+        <i data-lucide="globe"></i>
+        <span class="lang-sw__label">TH</span>
+      </button>
+      <button class="hamburger" id="ham" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="m-nav" id="mnav">
+  <button class="m-nav__close" id="mnav-close" aria-label="Close menu">
+    <i data-lucide="x" style="width:24px;height:24px;"></i>
+  </button>
+  <ul class="m-nav__list">
+    <li><a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a></li>
+    <li><a href="#products" data-lang-th="แผนประกัน" data-lang-en="Plans">แผนประกัน</a></li>
+    <li><a href="#process" data-lang-th="ขั้นตอน" data-lang-en="Process">ขั้นตอน</a></li>
+    <li><a href="#testimonials" data-lang-th="ลูกค้า" data-lang-en="Clients">ลูกค้า</a></li>
+    <li><a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div style="height:3px;background:var(--sienna);"></div>
+  <div class="hero__bar">
+    <span class="issue-txt en-track" data-lang-th="ก่อตั้ง พ.ศ. ๒๕๐๖ — เล่มที่ LXI" data-lang-en="Est. 1963 — Volume LXI">ก่อตั้ง พ.ศ. ๒๕๐๖ — เล่มที่ LXI</span>
+    <span class="issue-txt en-track" data-lang-th="ประกันชีวิต · สุขภาพ · เกษียณอายุ" data-lang-en="Life · Health · Retirement">ประกันชีวิต · สุขภาพ · เกษียณอายุ</span>
+  </div>
+
+  <div class="hero__body rv">
+    <div class="hero__eyebrow">
+      <div class="hero__ey-line"></div>
+      <span class="eyebrow-txt" data-lang-th="ความไว้วางใจตั้งแต่ปีพ.ศ. ๒๕๐๖" data-lang-en="Trusted Since 1963">ความไว้วางใจตั้งแต่ปีพ.ศ. ๒๕๐๖</span>
+    </div>
+
+    <h1 class="hero__h1">
+      <span data-lang-th="ชีวิตที่" data-lang-en="A Life">ชีวิตที่</span>
+      <em><span data-lang-th="มั่นคง" data-lang-en="Secured.">มั่นคง</span></em><br>
+      <span data-lang-th="คือมรดก" data-lang-en="A Legacy">คือมรดก</span><br>
+      <span data-lang-th="ที่แท้จริง" data-lang-en="Worth Keeping.">ที่แท้จริง</span>
+    </h1>
+
+    <div class="hero__img-wrap">
+      <img class="hero__img"
+        src="https://images.unsplash.com/photo-1517554558809-9b4971b38f39?w=1200&h=520&fit=crop"
+        alt="Family walking together in a field of flowers">
+      <div class="hero__caption">
+        <span data-lang-th="ครอบครัวของคุณ คือเหตุผลที่เราดำรงอยู่" data-lang-en="Your family is the reason we exist">ครอบครัวของคุณ คือเหตุผลที่เราดำรงอยู่</span>
+      </div>
+    </div>
+
+    <blockquote class="hero__pq">
+      <span data-lang-th="การปกป้องครอบครัวคือการกระทำที่ยิ่งใหญ่ที่สุดของความรัก ไม่ใช่สิ่งที่ควรผัดวันประกันพรุ่ง" data-lang-en="Protecting your family is the greatest act of love — not a decision to be deferred.">การปกป้องครอบครัวคือการกระทำที่ยิ่งใหญ่ที่สุดของความรัก ไม่ใช่สิ่งที่ควรผัดวันประกันพรุ่ง</span>
+    </blockquote>
+
+    <div class="hero__cta">
+      <a href="#products" class="btn-p">
+        <span data-lang-th="เริ่มต้นคุ้มครองวันนี้" data-lang-en="Start Your Coverage Today">เริ่มต้นคุ้มครองวันนี้</span>
+        <i data-lucide="arrow-right"></i>
+      </a>
+      <a href="#about" class="btn-o">
+        <span data-lang-th="เรียนรู้เพิ่มเติม" data-lang-en="Learn More">เรียนรู้เพิ่มเติม</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="ruled-hr">
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat rv">
+      <div class="stat__n">60<span>+</span></div>
+      <div class="stat-lbl" data-lang-th="ปีแห่งประสบการณ์" data-lang-en="Years of Experience">ปีแห่งประสบการณ์</div>
+    </div>
+    <div class="stat rv d1">
+      <div class="stat__n">2.4<span>M</span></div>
+      <div class="stat-lbl" data-lang-th="กรมธรรม์ที่ออก" data-lang-en="Policies Issued">กรมธรรม์ที่ออก</div>
+    </div>
+    <div class="stat rv d2">
+      <div class="stat__n">98<span>%</span></div>
+      <div class="stat-lbl" data-lang-th="อัตราการจ่ายสินไหม" data-lang-en="Claims Paid Rate">อัตราการจ่ายสินไหม</div>
+    </div>
+    <div class="stat rv d3">
+      <div class="stat__n">฿12<span>B</span></div>
+      <div class="stat-lbl" data-lang-th="สินไหมที่ชำระแล้ว" data-lang-en="Claims Settled">สินไหมที่ชำระแล้ว</div>
+    </div>
+  </div>
+</div>
+
+<hr class="ruled-hr">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label rv">
+      <div class="section-label__line"></div>
+      <span class="label-tag en-track" data-lang-th="เกี่ยวกับ SST" data-lang-en="About SST">เกี่ยวกับ SST</span>
+    </div>
+    <div class="about-grid">
+      <div class="rv">
+        <div class="about-img-wrap">
+          <img class="about-img"
+            src="https://images.unsplash.com/photo-1558895562-950e5f359236?w=700&h=500&fit=crop"
+            alt="Elderly couple sitting together peacefully">
+          <div class="about-img-cap">
+            <span data-lang-th="รากฐานที่มั่นคง สร้างขึ้นจากความเชื่อมั่นของลูกค้าทุกรุ่น" data-lang-en="A foundation built on trust, generation after generation">รากฐานที่มั่นคง สร้างขึ้นจากความเชื่อมั่นของลูกค้าทุกรุ่น</span>
+          </div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <h2 class="section-title">
+          <span data-lang-th="มากกว่าหกทศวรรษ" data-lang-en="Six Decades of">มากกว่าหกทศวรรษ</span><br>
+          <em style="font-style:italic;color:var(--sienna)"><span data-lang-th="แห่งความไว้วางใจ" data-lang-en="Steadfast Trust">แห่งความไว้วางใจ</span></em>
+        </h2>
+        <p class="about-text">
+          <span data-lang-th="SST ก่อตั้งขึ้นในปี พ.ศ. 2506 ด้วยปณิธานอันแน่วแน่ว่า ทุกครอบครัวไทยสมควรได้รับความคุ้มครองที่ครอบคลุมและยุติธรรม เราได้เติบโตมาพร้อมกับประเทศ เข้าใจชีวิตของคนไทย และรู้ดีว่าความมั่นคงทางการเงินคือพื้นฐานของทุกความฝัน" data-lang-en="Founded in 1963 with the unwavering conviction that every Thai family deserves comprehensive, fair protection. We have grown alongside this nation — understanding the rhythms of Thai life and the profound importance of planning for the future.">SST ก่อตั้งขึ้นในปี พ.ศ. 2506 ด้วยปณิธานอันแน่วแน่ว่า ทุกครอบครัวไทยสมควรได้รับความคุ้มครองที่ครอบคลุมและยุติธรรม เราได้เติบโตมาพร้อมกับประเทศ เข้าใจชีวิตของคนไทย และรู้ดีว่าความมั่นคงทางการเงินคือพื้นฐานของทุกความฝัน</span>
+        </p>
+        <blockquote class="pull-q">
+          <span data-lang-th="เราไม่ได้แค่ขายกรมธรรม์ เราสร้างความมั่นคงให้กับรุ่นต่อรุ่น" data-lang-en="We do not merely sell policies — we build security across generations.">เราไม่ได้แค่ขายกรมธรรม์ เราสร้างความมั่นคงให้กับรุ่นต่อรุ่น</span>
+        </blockquote>
+        <p class="about-text">
+          <span data-lang-th="ปัจจุบัน SST เป็นหนึ่งในบริษัทประกันชีวิตชั้นนำของประเทศ ด้วยเครือข่ายตัวแทนกว่า 15,000 คนทั่วทุกจังหวัด และสินทรัพย์รวมมากกว่า 80,000 ล้านบาท พร้อมดูแลคุณและคนที่คุณรัก ไม่ว่าจะอยู่ที่ใด" data-lang-en="Today SST stands among Thailand's leading life insurers — 15,000+ agents across every province, total assets exceeding ฿80 billion, and an unwavering commitment to the people who trust us.">ปัจจุบัน SST เป็นหนึ่งในบริษัทประกันชีวิตชั้นนำของประเทศ ด้วยเครือข่ายตัวแทนกว่า 15,000 คนทั่วทุกจังหวัด และสินทรัพย์รวมมากกว่า 80,000 ล้านบาท พร้อมดูแลคุณและคนที่คุณรัก ไม่ว่าจะอยู่ที่ใด</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ruled-triple"></div>
+
+<!-- PRODUCTS -->
+<section id="products" class="products-sec">
+  <div class="container">
+    <div class="section-label rv">
+      <div class="section-label__line"></div>
+      <span class="label-tag en-track" data-lang-th="แผนความคุ้มครอง" data-lang-en="Protection Plans">แผนความคุ้มครอง</span>
+    </div>
+    <h2 class="section-title rv">
+      <span data-lang-th="เลือกแผนที่ใช่" data-lang-en="Choose the Plan">เลือกแผนที่ใช่</span><br>
+      <em style="font-style:italic;color:var(--sienna)"><span data-lang-th="สำหรับชีวิตของคุณ" data-lang-en="That Fits Your Life">สำหรับชีวิตของคุณ</span></em>
+    </h2>
+
+    <div class="acc rv" id="accordion">
+      <div class="acc-item active">
+        <div class="acc-hd" onclick="toggleAcc(this)">
+          <div class="acc-num">01</div>
+          <div class="acc-title" data-lang-th="SST ชีวิตมั่นคง — ประกันชีวิตพื้นฐาน" data-lang-en="SST Steadfast Life — Basic Life Coverage">SST ชีวิตมั่นคง — ประกันชีวิตพื้นฐาน</div>
+          <div class="acc-ico"><i data-lucide="plus" style="width:18px;height:18px;"></i></div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-cnt">
+            <p data-lang-th="แผนประกันชีวิตพื้นฐานที่ออกแบบมาเพื่อให้ครอบครัวของคุณได้รับความคุ้มครองทางการเงินอย่างมั่นคง ทุนประกันเริ่มต้นที่ 500,000 บาท พร้อมเบี้ยประกันที่คุ้มค่าสำหรับทุกระดับรายได้ ไม่ต้องตรวจสุขภาพสำหรับทุนประกันไม่เกิน 2 ล้านบาท" data-lang-en="Essential life insurance giving your family lasting financial protection. Coverage from ฿500,000 with premiums accessible across all income levels. No medical exam required for sums up to ฿2 million.">แผนประกันชีวิตพื้นฐานที่ออกแบบมาเพื่อให้ครอบครัวของคุณได้รับความคุ้มครองทางการเงินอย่างมั่นคง ทุนประกันเริ่มต้นที่ 500,000 บาท พร้อมเบี้ยประกันที่คุ้มค่าสำหรับทุกระดับรายได้ ไม่ต้องตรวจสุขภาพสำหรับทุนประกันไม่เกิน 2 ล้านบาท</p>
+            <div class="badges">
+              <span class="badge" data-lang-th="ทุนประกันสูงสุด ฿10M" data-lang-en="Up to ฿10M Cover">ทุนประกันสูงสุด ฿10M</span>
+              <span class="badge" data-lang-th="อายุ 1–70 ปี" data-lang-en="Age 1–70">อายุ 1–70 ปี</span>
+              <span class="badge" data-lang-th="ไม่ต้องตรวจสุขภาพ" data-lang-en="No Medical Exam">ไม่ต้องตรวจสุขภาพ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-hd" onclick="toggleAcc(this)">
+          <div class="acc-num">02</div>
+          <div class="acc-title" data-lang-th="SST สุขภาพทองคำ — ประกันสุขภาพครอบคลุม" data-lang-en="SST Gold Health — Comprehensive Medical Cover">SST สุขภาพทองคำ — ประกันสุขภาพครอบคลุม</div>
+          <div class="acc-ico"><i data-lucide="plus" style="width:18px;height:18px;"></i></div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-cnt">
+            <p data-lang-th="ความคุ้มครองทางสุขภาพครอบคลุมทั้งผู้ป่วยในและผู้ป่วยนอก รวมถึงโรคร้ายแรง 40 โรค วงเงินค่ารักษาพยาบาลรายปีสูงสุด 5 ล้านบาท รองรับโรงพยาบาลชั้นนำทั่วประเทศและต่างประเทศ พร้อมบริการฉุกเฉินตลอด 24 ชั่วโมง" data-lang-en="Comprehensive inpatient and outpatient cover, including 40 critical illnesses, with annual medical benefits up to ฿5 million. Accepted at leading hospitals nationwide and internationally, with 24-hour emergency assistance.">ความคุ้มครองทางสุขภาพครอบคลุมทั้งผู้ป่วยในและผู้ป่วยนอก รวมถึงโรคร้ายแรง 40 โรค วงเงินค่ารักษาพยาบาลรายปีสูงสุด 5 ล้านบาท รองรับโรงพยาบาลชั้นนำทั่วประเทศและต่างประเทศ พร้อมบริการฉุกเฉินตลอด 24 ชั่วโมง</p>
+            <div class="badges">
+              <span class="badge" data-lang-th="฿5M/ปี" data-lang-en="฿5M/yr Limit">฿5M/ปี</span>
+              <span class="badge" data-lang-th="40 โรคร้ายแรง" data-lang-en="40 Critical Illnesses">40 โรคร้ายแรง</span>
+              <span class="badge" data-lang-th="คุ้มครองต่างประเทศ" data-lang-en="International Cover">คุ้มครองต่างประเทศ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-hd" onclick="toggleAcc(this)">
+          <div class="acc-num">03</div>
+          <div class="acc-title" data-lang-th="SST เกษียณสุข — แผนออมเงินเพื่อเกษียณ" data-lang-en="SST Golden Retire — Retirement Savings Plan">SST เกษียณสุข — แผนออมเงินเพื่อเกษียณ</div>
+          <div class="acc-ico"><i data-lucide="plus" style="width:18px;height:18px;"></i></div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-cnt">
+            <p data-lang-th="แผนออมทรัพย์ระยะยาวที่รับประกันผลตอบแทนขั้นต่ำ 2.5% ต่อปี พร้อมความคุ้มครองชีวิตตลอดอายุสัญญา เหมาะสำหรับผู้ที่ต้องการสร้างรายได้หลังเกษียณที่มั่นคงและสามารถนำเบี้ยประกันไปลดหย่อนภาษีได้สูงสุด 200,000 บาทต่อปี" data-lang-en="Long-term savings with a guaranteed minimum return of 2.5% p.a., plus life protection throughout the term. Ideal for building a dependable retirement income — premiums qualify for up to ฿200,000 annual tax deduction.">แผนออมทรัพย์ระยะยาวที่รับประกันผลตอบแทนขั้นต่ำ 2.5% ต่อปี พร้อมความคุ้มครองชีวิตตลอดอายุสัญญา เหมาะสำหรับผู้ที่ต้องการสร้างรายได้หลังเกษียณที่มั่นคงและสามารถนำเบี้ยประกันไปลดหย่อนภาษีได้สูงสุด 200,000 บาทต่อปี</p>
+            <div class="badges">
+              <span class="badge" data-lang-th="รับประกัน 2.5%/ปี" data-lang-en="2.5% Guaranteed p.a.">รับประกัน 2.5%/ปี</span>
+              <span class="badge" data-lang-th="10–30 ปี" data-lang-en="10–30 Year Terms">10–30 ปี</span>
+              <span class="badge" data-lang-th="ลดหย่อนภาษี" data-lang-en="Tax Deductible">ลดหย่อนภาษี</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-hd" onclick="toggleAcc(this)">
+          <div class="acc-num">04</div>
+          <div class="acc-title" data-lang-th="SST ครอบครัวสุขสันต์ — ประกันชีวิตครอบครัว" data-lang-en="SST Family Shield — Family Protection Plan">SST ครอบครัวสุขสันต์ — ประกันชีวิตครอบครัว</div>
+          <div class="acc-ico"><i data-lucide="plus" style="width:18px;height:18px;"></i></div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-cnt">
+            <p data-lang-th="แผนประกันชีวิตสำหรับทั้งครอบครัวในกรมธรรม์เดียว คุ้มครองพ่อแม่ ลูก และคนที่คุณรัก ด้วยเบี้ยประกันที่ประหยัดกว่าการทำแยกรายบุคคลถึง 30% และครอบคลุมทารกแรกเกิดโดยอัตโนมัติ" data-lang-en="Full family protection under one policy — parents, children, and loved ones. Up to 30% premium savings versus individual policies, with automatic coverage for newborns from day one.">แผนประกันชีวิตสำหรับทั้งครอบครัวในกรมธรรม์เดียว คุ้มครองพ่อแม่ ลูก และคนที่คุณรัก ด้วยเบี้ยประกันที่ประหยัดกว่าการทำแยกรายบุคคลถึง 30% และครอบคลุมทารกแรกเกิดโดยอัตโนมัติ</p>
+            <div class="badges">
+              <span class="badge" data-lang-th="ครอบครัวทั้งหมด" data-lang-en="Whole Family">ครอบครัวทั้งหมด</span>
+              <span class="badge" data-lang-th="ประหยัดสูงสุด 30%" data-lang-en="Save up to 30%">ประหยัดสูงสุด 30%</span>
+              <span class="badge" data-lang-th="คุ้มครองแรกเกิด" data-lang-en="Newborn Covered">คุ้มครองแรกเกิด</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="ruled-hr">
+
+<!-- WHY TRUST -->
+<section id="why">
+  <div class="container">
+    <div class="section-label rv">
+      <div class="section-label__line"></div>
+      <span class="label-tag en-track" data-lang-th="เหตุผลที่เลือก SST" data-lang-en="Why Choose SST">เหตุผลที่เลือก SST</span>
+    </div>
+    <h2 class="section-title rv">
+      <span data-lang-th="หลักการที่ยึดมั่น" data-lang-en="Principles We Hold">หลักการที่ยึดมั่น</span><br>
+      <em style="font-style:italic;color:var(--sienna)"><span data-lang-th="ตลอดทุกยุคสมัย" data-lang-en="Across Every Era">ตลอดทุกยุคสมัย</span></em>
+    </h2>
+
+    <div class="trust-rows">
+      <div class="trust-row rv">
+        <div class="trust-num">I</div>
+        <div>
+          <h3 data-lang-th="ความโปร่งใสทุกขั้นตอน" data-lang-en="Transparent at Every Step">ความโปร่งใสทุกขั้นตอน</h3>
+          <p data-lang-th="กรมธรรม์ที่อ่านเข้าใจง่าย ไม่มีเงื่อนไขซ่อนเร้น ตัวแทนของเราได้รับการฝึกอบรมให้อธิบายรายละเอียดอย่างตรงไปตรงมา เพราะการตัดสินใจที่ดีเริ่มต้นจากข้อมูลที่ถูกต้องและครบถ้วน" data-lang-en="Policies written to be understood — no hidden conditions. Our agents are trained to explain every detail plainly and honestly, because good decisions begin with accurate, complete information.">กรมธรรม์ที่อ่านเข้าใจง่าย ไม่มีเงื่อนไขซ่อนเร้น ตัวแทนของเราได้รับการฝึกอบรมให้อธิบายรายละเอียดอย่างตรงไปตรงมา เพราะการตัดสินใจที่ดีเริ่มต้นจากข้อมูลที่ถูกต้องและครบถ้วน</p>
+        </div>
+      </div>
+      <div class="trust-row rv">
+        <div class="trust-num">II</div>
+        <div>
+          <h3 data-lang-th="จ่ายสินไหมรวดเร็ว ทันเวลา" data-lang-en="Claims Settled Swiftly">จ่ายสินไหมรวดเร็ว ทันเวลา</h3>
+          <p data-lang-th="ระบบการจัดการสินไหมของเราออกแบบมาให้รวดเร็วและยุติธรรม เฉลี่ยจ่ายสินไหมภายใน 7 วันทำการ เราเข้าใจดีว่าในยามวิกฤต ความรวดเร็วคือสิ่งที่ครอบครัวต้องการมากที่สุด" data-lang-en="Our claims system is designed for speed and fairness — average settlement within 7 business days. We understand that in times of crisis, promptness is what families need most.">ระบบการจัดการสินไหมของเราออกแบบมาให้รวดเร็วและยุติธรรม เฉลี่ยจ่ายสินไหมภายใน 7 วันทำการ เราเข้าใจดีว่าในยามวิกฤต ความรวดเร็วคือสิ่งที่ครอบครัวต้องการมากที่สุด</p>
+        </div>
+      </div>
+      <div class="trust-row rv">
+        <div class="trust-num">III</div>
+        <div>
+          <h3 data-lang-th="ฐานะทางการเงินแข็งแกร่ง" data-lang-en="Financial Strength You Can Count On">ฐานะทางการเงินแข็งแกร่ง</h3>
+          <p data-lang-th="SST ได้รับการจัดอันดับ AA+ จากสำนักงาน คปภ. ต่อเนื่อง 15 ปี สินทรัพย์รวมกว่า 80,000 ล้านบาท รับประกันว่าเมื่อถึงเวลาที่คุณต้องการ เราพร้อมอยู่เสมอ" data-lang-en="SST holds the AA+ OIC rating for 15 consecutive years, with total assets exceeding ฿80 billion — a guarantee that when you need us, we will be there.">SST ได้รับการจัดอันดับ AA+ จากสำนักงาน คปภ. ต่อเนื่อง 15 ปี สินทรัพย์รวมกว่า 80,000 ล้านบาท รับประกันว่าเมื่อถึงเวลาที่คุณต้องการ เราพร้อมอยู่เสมอ</p>
+        </div>
+      </div>
+      <div class="trust-row rv">
+        <div class="trust-num">IV</div>
+        <div>
+          <h3 data-lang-th="บริการดูแลลูกค้า 24/7" data-lang-en="24/7 Customer Care">บริการดูแลลูกค้า 24/7</h3>
+          <p data-lang-th="ทีมที่ปรึกษาพร้อมให้บริการตลอด 24 ชั่วโมง 7 วัน ทั้งทางโทรศัพท์ LINE และออนไลน์ หรือพบตัวแทนโดยตรงในทุกจังหวัดทั่วประเทศไทย" data-lang-en="Our advisory team is available 24 hours, 7 days — by phone, LINE, and online, or through direct agents across every province in Thailand.">ทีมที่ปรึกษาพร้อมให้บริการตลอด 24 ชั่วโมง 7 วัน ทั้งทางโทรศัพท์ LINE และออนไลน์ หรือพบตัวแทนโดยตรงในทุกจังหวัดทั่วประเทศไทย</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ruled-triple"></div>
+
+<!-- PROCESS -->
+<section id="process" class="process-bg">
+  <div class="container">
+    <div class="section-label rv">
+      <div class="section-label__line"></div>
+      <span class="label-tag en-track" data-lang-th="วิธีเริ่มต้น" data-lang-en="How to Begin">วิธีเริ่มต้น</span>
+    </div>
+    <h2 class="section-title rv">
+      <span data-lang-th="เพียงสี่ขั้นตอน" data-lang-en="Four Steps to">เพียงสี่ขั้นตอน</span><br>
+      <em style="font-style:italic;color:var(--sienna)"><span data-lang-th="สู่ความคุ้มครองที่สมบูรณ์" data-lang-en="Complete Protection">สู่ความคุ้มครองที่สมบูรณ์</span></em>
+    </h2>
+
+    <div class="proc-steps">
+      <div class="proc-step rv">
+        <div class="proc-num">01</div>
+        <div>
+          <div class="proc-title" data-lang-th="ปรึกษาผู้เชี่ยวชาญ" data-lang-en="Consult an Expert">ปรึกษาผู้เชี่ยวชาญ</div>
+          <div class="proc-desc" data-lang-th="พบกับที่ปรึกษา SST ที่ผ่านการรับรองเพื่อประเมินความต้องการของคุณและครอบครัว ฟรี ไม่มีข้อผูกมัด" data-lang-en="Meet a certified SST advisor to assess your family's needs — free, with no obligation.">พบกับที่ปรึกษา SST ที่ผ่านการรับรองเพื่อประเมินความต้องการของคุณและครอบครัว ฟรี ไม่มีข้อผูกมัด</div>
+        </div>
+      </div>
+      <div class="proc-step rv d1">
+        <div class="proc-num">02</div>
+        <div>
+          <div class="proc-title" data-lang-th="เลือกแผนที่เหมาะสม" data-lang-en="Select Your Plan">เลือกแผนที่เหมาะสม</div>
+          <div class="proc-desc" data-lang-th="ที่ปรึกษานำเสนอแผนที่เหมาะกับงบประมาณและเป้าหมายของคุณ คุณปรับแต่งความคุ้มครองได้อย่างอิสระ" data-lang-en="Your advisor presents plans suited to your budget and goals — you can freely customise the coverage level.">ที่ปรึกษานำเสนอแผนที่เหมาะกับงบประมาณและเป้าหมายของคุณ คุณปรับแต่งความคุ้มครองได้อย่างอิสระ</div>
+        </div>
+      </div>
+      <div class="proc-step rv d2">
+        <div class="proc-num">03</div>
+        <div>
+          <div class="proc-title" data-lang-th="ยื่นใบสมัครและชำระเบี้ย" data-lang-en="Apply and Pay Premium">ยื่นใบสมัครและชำระเบี้ย</div>
+          <div class="proc-desc" data-lang-th="กรอกใบสมัครออนไลน์หรือกับตัวแทน อนุมัติภายใน 48 ชั่วโมง ชำระเบี้ยรายเดือน รายไตรมาส หรือรายปี" data-lang-en="Apply online or with your agent. Approval within 48 hours. Pay monthly, quarterly, or annually.">กรอกใบสมัครออนไลน์หรือกับตัวแทน อนุมัติภายใน 48 ชั่วโมง ชำระเบี้ยรายเดือน รายไตรมาส หรือรายปี</div>
+        </div>
+      </div>
+      <div class="proc-step rv d3">
+        <div class="proc-num">04</div>
+        <div>
+          <div class="proc-title" data-lang-th="รับกรมธรรม์ เริ่มคุ้มครองทันที" data-lang-en="Receive Policy, Be Protected">รับกรมธรรม์ เริ่มคุ้มครองทันที</div>
+          <div class="proc-desc" data-lang-th="รับกรมธรรม์ดิจิทัลและเอกสารอย่างเป็นทางการ ความคุ้มครองเริ่มต้นทันทีหลังชำระเบี้ยงวดแรก พร้อมแอป SST สำหรับจัดการกรมธรรม์" data-lang-en="Receive your digital policy and official documents. Coverage begins immediately upon first payment, with the SST app for easy management.">รับกรมธรรม์ดิจิทัลและเอกสารอย่างเป็นทางการ ความคุ้มครองเริ่มต้นทันทีหลังชำระเบี้ยงวดแรก พร้อมแอป SST สำหรับจัดการกรมธรรม์</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="ruled-hr">
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testi-bg">
+  <div class="container">
+    <div class="section-label rv">
+      <div class="section-label__line"></div>
+      <span class="label-tag en-track" data-lang-th="เสียงจากลูกค้า" data-lang-en="Client Voices">เสียงจากลูกค้า</span>
+    </div>
+    <h2 class="section-title rv">
+      <span data-lang-th="พวกเขาพูดถึง" data-lang-en="What They Say">พวกเขาพูดถึง</span><br>
+      <em style="font-style:italic;color:var(--sienna)"><span data-lang-th="SST อย่างไร" data-lang-en="About SST">SST อย่างไร</span></em>
+    </h2>
+
+    <div class="testi-list">
+      <div class="testi rv">
+        <div class="testi-q">
+          <span data-lang-th="เมื่อสามีของดิฉันจากไปกะทันหัน SST จ่ายสินไหมครบถ้วนภายในห้าวันทำการ ไม่มีการต่อรอง ไม่มีคำถามที่ไม่จำเป็น มีเพียงความห่วงใยและความรวดเร็ว ดิฉันรู้สึกขอบคุณจากใจจริง" data-lang-en="When my husband passed suddenly, SST settled the full claim within five working days — no negotiation, no unnecessary questions, only care and speed. I am grateful beyond words.">เมื่อสามีของดิฉันจากไปกะทันหัน SST จ่ายสินไหมครบถ้วนภายในห้าวันทำการ ไม่มีการต่อรอง ไม่มีคำถามที่ไม่จำเป็น มีเพียงความห่วงใยและความรวดเร็ว ดิฉันรู้สึกขอบคุณจากใจจริง</span>
+        </div>
+        <div class="testi-meta">
+          <img class="testi-av"
+            src="https://images.unsplash.com/photo-1592214468571-0a38317ef79e?w=100&h=100&fit=crop"
+            alt="Customer Sumalee">
+          <div>
+            <div class="testi-name" data-lang-th="คุณสุมาลี จันทร์สว่าง" data-lang-en="Ms. Sumalee Chansawang">คุณสุมาลี จันทร์สว่าง</div>
+            <div class="testi-role" data-lang-th="ลูกค้า SST ชีวิตมั่นคง · เชียงใหม่" data-lang-en="SST Steadfast Life · Chiang Mai">ลูกค้า SST ชีวิตมั่นคง · เชียงใหม่</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi rv">
+        <div class="testi-q">
+          <span data-lang-th="ผมทำแผนเกษียณกับ SST มาสิบปีแล้ว ผลตอบแทนดีกว่าที่คาดไว้ และที่สำคัญกว่าคือความมั่นใจว่าเงินออมของผมปลอดภัย รอวันที่จะได้ใช้ชีวิตหลังเกษียณอย่างสบายใจ" data-lang-en="I have held my retirement plan with SST for ten years. Returns exceed my expectations — but more important is the certainty that my savings are safe, waiting for a comfortable retirement.">ผมทำแผนเกษียณกับ SST มาสิบปีแล้ว ผลตอบแทนดีกว่าที่คาดไว้ และที่สำคัญกว่าคือความมั่นใจว่าเงินออมของผมปลอดภัย รอวันที่จะได้ใช้ชีวิตหลังเกษียณอย่างสบายใจ</span>
+        </div>
+        <div class="testi-meta">
+          <img class="testi-av"
+            src="https://images.unsplash.com/photo-1637684666587-91e51b10a555?w=100&h=100&fit=crop"
+            alt="Customer Praphas">
+          <div>
+            <div class="testi-name" data-lang-th="คุณประภาส วงศ์สกุล" data-lang-en="Mr. Praphas Wongsagul">คุณประภาส วงศ์สกุล</div>
+            <div class="testi-role" data-lang-th="ลูกค้า SST เกษียณสุข · กรุงเทพฯ" data-lang-en="SST Golden Retire · Bangkok">ลูกค้า SST เกษียณสุข · กรุงเทพฯ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi rv">
+        <div class="testi-q">
+          <span data-lang-th="ตัวแทน SST ใช้เวลาอธิบายทุกอย่างก่อนที่ฉันจะเซ็นเอกสารสักฉบับ ไม่รีบ ไม่กดดัน มีแค่ความจริงใจ นั่นคือเหตุผลที่ฉันฝากชีวิตและครอบครัวไว้กับ SST" data-lang-en="My SST agent explained everything before I signed a single document — no rush, no pressure, only sincerity. That is why I trust SST with my life and my family.">ตัวแทน SST ใช้เวลาอธิบายทุกอย่างก่อนที่ฉันจะเซ็นเอกสารสักฉบับ ไม่รีบ ไม่กดดัน มีแค่ความจริงใจ นั่นคือเหตุผลที่ฉันฝากชีวิตและครอบครัวไว้กับ SST</span>
+        </div>
+        <div class="testi-meta">
+          <img class="testi-av"
+            src="https://images.unsplash.com/photo-1628705250580-80b96d4657f6?w=100&h=100&fit=crop"
+            alt="Customer Naruemol">
+          <div>
+            <div class="testi-name" data-lang-th="คุณนฤมล ศรีอรุณ" data-lang-en="Ms. Naruemol Sriarun">คุณนฤมล ศรีอรุณ</div>
+            <div class="testi-role" data-lang-th="ลูกค้า SST ครอบครัวสุขสันต์ · ขอนแก่น" data-lang-en="SST Family Shield · Khon Kaen">ลูกค้า SST ครอบครัวสุขสันต์ · ขอนแก่น</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ruled-triple"></div>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-inner rv">
+    <div class="section-label" style="justify-content:center;margin-bottom:1.2rem">
+      <div class="cta-label-line"></div>
+      <span class="label-tag" style="color:rgba(255,255,255,.8)" data-lang-th="เริ่มต้นวันนี้" data-lang-en="Begin Today">เริ่มต้นวันนี้</span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="section-title">
+      <span data-lang-th="อนาคตที่ดีกว่า" data-lang-en="A Better Future">อนาคตที่ดีกว่า</span><br>
+      <span data-lang-th="เริ่มต้นจากวันนี้" data-lang-en="Begins Today">เริ่มต้นจากวันนี้</span>
+    </h2>
+    <p data-lang-th="อย่าปล่อยให้ความไม่แน่นอนของชีวิตกำหนดอนาคตของครอบครัวคุณ SST พร้อมเป็นพันธมิตรที่ไว้วางใจได้ในทุกก้าว นัดพบที่ปรึกษาของเราวันนี้ — ฟรี ไม่มีข้อผูกมัด" data-lang-en="Don't let life's uncertainties define your family's future. SST is ready to be your trusted partner at every stage. Consult our advisor today — free, with no obligation.">อย่าปล่อยให้ความไม่แน่นอนของชีวิตกำหนดอนาคตของครอบครัวคุณ SST พร้อมเป็นพันธมิตรที่ไว้วางใจได้ในทุกก้าว นัดพบที่ปรึกษาของเราวันนี้ — ฟรี ไม่มีข้อผูกมัด</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
+      <a href="#contact" class="btn-p">
+        <i data-lucide="calendar"></i>
+        <span data-lang-th="นัดปรึกษาฟรี" data-lang-en="Book Free Consultation">นัดปรึกษาฟรี</span>
+      </a>
+      <a href="tel:+6621234567" class="btn-o">
+        <i data-lucide="phone"></i>
+        <span data-lang-th="โทร 02-123-4567" data-lang-en="Call 02-123-4567">โทร 02-123-4567</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <hr class="ruled-hr" style="margin-bottom:2.5rem">
+    <div class="footer-grid">
+      <div>
+        <div class="f-logo">SST<span>.</span></div>
+        <p class="f-desc" data-lang-th="บริษัท SST ประกันชีวิต จำกัด (มหาชน) — ปกป้องครอบครัวชาวไทยด้วยความซื่อสัตย์ โปร่งใส และรับผิดชอบมากว่า 60 ปี" data-lang-en="SST Life Insurance Plc. — protecting Thai families with integrity, transparency, and accountability for over 60 years.">บริษัท SST ประกันชีวิต จำกัด (มหาชน) — ปกป้องครอบครัวชาวไทยด้วยความซื่อสัตย์ โปร่งใส และรับผิดชอบมากว่า 60 ปี</p>
+        <div class="f-social">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook" style="width:18px;height:18px;"></i></a>
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram" style="width:18px;height:18px;"></i></a>
+          <a href="#" aria-label="YouTube"><i data-lucide="youtube" style="width:18px;height:18px;"></i></a>
+          <a href="#" aria-label="LINE"><i data-lucide="message-circle" style="width:18px;height:18px;"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="col-title" data-lang-th="บริการ" data-lang-en="Products">บริการ</div>
+        <ul class="f-links">
+          <li><a href="#products" data-lang-th="ประกันชีวิต" data-lang-en="Life Insurance">ประกันชีวิต</a></li>
+          <li><a href="#products" data-lang-th="ประกันสุขภาพ" data-lang-en="Health Insurance">ประกันสุขภาพ</a></li>
+          <li><a href="#products" data-lang-th="แผนเกษียณ" data-lang-en="Retirement Plans">แผนเกษียณ</a></li>
+          <li><a href="#products" data-lang-th="ประกันครอบครัว" data-lang-en="Family Plans">ประกันครอบครัว</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="col-title" data-lang-th="บริษัท" data-lang-en="Company">บริษัท</div>
+        <ul class="f-links">
+          <li><a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About Us">เกี่ยวกับเรา</a></li>
+          <li><a href="#" data-lang-th="ข่าวสาร" data-lang-en="News">ข่าวสาร</a></li>
+          <li><a href="#" data-lang-th="ร่วมงานกับเรา" data-lang-en="Careers">ร่วมงานกับเรา</a></li>
+          <li><a href="#" data-lang-th="นักลงทุนสัมพันธ์" data-lang-en="Investor Relations">นักลงทุนสัมพันธ์</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="col-title" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</div>
+        <ul class="f-links">
+          <li>
+            <a href="tel:+6621234567">
+              <i data-lucide="phone" style="width:13px;height:13px;flex-shrink:0"></i>
+              02-123-4567
+            </a>
+          </li>
+          <li>
+            <a href="mailto:info@sst.co.th">
+              <i data-lucide="mail" style="width:13px;height:13px;flex-shrink:0"></i>
+              info@sst.co.th
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i data-lucide="map-pin" style="width:13px;height:13px;flex-shrink:0"></i>
+              <span data-lang-th="อาคาร SST ถนนสาทร กรุงเทพฯ" data-lang-en="SST Tower, Sathorn Rd., Bangkok">อาคาร SST ถนนสาทร กรุงเทพฯ</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i data-lucide="clock" style="width:13px;height:13px;flex-shrink:0"></i>
+              <span data-lang-th="จันทร์–ศุกร์ 08:30–17:30" data-lang-en="Mon–Fri 08:30–17:30">จันทร์–ศุกร์ 08:30–17:30</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p data-lang-th="© 2567 บริษัท SST ประกันชีวิต จำกัด (มหาชน) ใบอนุญาต คปภ. เลขที่ 0001-2506 สงวนลิขสิทธิ์" data-lang-en="© 2024 SST Life Insurance Plc. OIC Licence No. 0001-1963. All rights reserved.">© 2567 บริษัท SST ประกันชีวิต จำกัด (มหาชน) ใบอนุญาต คปภ. เลขที่ 0001-2506 สงวนลิขสิทธิ์</p>
+      <p data-lang-th="ประกันภัยไม่ใช่เงินฝาก — ผลประโยชน์เป็นไปตามเงื่อนไขกรมธรรม์" data-lang-en="Insurance is not a bank deposit — benefits are subject to policy terms.">ประกันภัยไม่ใช่เงินฝาก — ผลประโยชน์เป็นไปตามเงื่อนไขกรมธรรม์</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll
+var nb=document.getElementById('navbar');
+window.addEventListener('scroll',function(){nb.classList.toggle('scrolled',window.scrollY>50)},{passive:true});
+
+// Hamburger
+var ham=document.getElementById('ham'),mn=document.getElementById('mnav'),mc=document.getElementById('mnav-close');
+function openMnav(){ham.classList.add('open');mn.classList.add('open');document.body.style.overflow='hidden'}
+function closeMnav(){ham.classList.remove('open');mn.classList.remove('open');document.body.style.overflow=''}
+ham.addEventListener('click',function(){mn.classList.contains('open')?closeMnav():openMnav()});
+mc.addEventListener('click',closeMnav);
+mn.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMnav)});
+
+// Accordion
+function toggleAcc(hd){
+  var item=hd.parentElement,active=item.classList.contains('active');
+  document.querySelectorAll('.acc-item').forEach(function(i){i.classList.remove('active')});
+  if(!active)item.classList.add('active');
+}
+
+// Scroll reveal
+var rvEls=document.querySelectorAll('.rv');
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vi');obs.unobserve(e.target)}});
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+rvEls.forEach(function(el){obs.observe(el)});
+
+// Lucide
+lucide.createIcons();
+</script>
+
+<script>
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){e.textContent=t}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
+</script>
+</body>
+</html>
