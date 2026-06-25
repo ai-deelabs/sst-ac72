@@ -1018,96 +1018,61 @@
       .cta-band__btns { flex-direction: row; justify-content: center; }
     }
 
-    /* ══════════════════════════════════════════════════
-       CONTACT
-    ══════════════════════════════════════════════════ */
-    .contact {
-      background: var(--navy);
-      padding: 5rem 0;
+    /* ── CTA (ported from v3) ── */
+    .cta {
+      padding: 6rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
     }
-    .contact__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
+    .cta__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, rgba(74,127,165,0.20) 0%, rgba(200,220,240,0.05) 100%);
     }
-    @media (min-width: 860px) {
-      .contact__grid { grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+    .cta__bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(74,127,165,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,127,165,0.12) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
-    .contact__info h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      margin: 0.5rem 0 1.5rem;
+    .cta__content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta__content h2 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin: 0.5rem 0 1rem;
       line-height: 1.45;
     }
-    html[lang="en"] .contact__info h2 { line-height: 1.15; }
-    .contact__info p {
-      color: rgba(200,220,240,0.68);
-      font-size: 0.92rem;
-      line-height: 1.85;
-      margin-bottom: 2rem;
-    }
-    .contact-detail-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .contact-detail {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
+    html[lang="en"] .cta__content h2 { line-height: 1.2; }
+    .cta__content p {
       color: rgba(200,220,240,0.8);
-      font-size: 0.9rem;
-      line-height: 1.7;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
     }
-    .contact-detail i {
-      color: var(--steel);
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-    }
-
-    .contact-form {
+    .cta__btns {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1rem;
+      align-items: center;
     }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
+    @media (min-width: 480px) {
+      .cta__btns { flex-direction: row; justify-content: center; }
     }
-    @media (min-width: 480px) { .form-row { grid-template-columns: 1fr 1fr; } }
-    .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
-    .form-field label {
-      font-size: 0.78rem;
+    .cta__note {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
       color: rgba(200,220,240,0.55);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-    html[lang="en"] .form-field label { letter-spacing: 0.1em; }
-    .form-field input,
-    .form-field textarea,
-    .form-field select {
-      background: rgba(30,58,95,0.45);
-      border: 1px solid rgba(74,127,165,0.25);
-      border-radius: 6px;
-      color: var(--white);
-      font-family: var(--font-th);
-      font-size: 0.95rem;
-      padding: 0.85em 1em;
-      width: 100%;
-      outline: none;
-      transition: border-color 0.25s;
-      min-height: 48px;
-    }
-    .form-field textarea { min-height: 110px; resize: vertical; }
-    .form-field input:focus,
-    .form-field textarea:focus,
-    .form-field select:focus {
-      border-color: var(--steel);
-    }
-    .form-field input::placeholder,
-    .form-field textarea::placeholder {
-      color: rgba(200,220,240,0.3);
+      font-family: var(--font-cd);
+      letter-spacing: 0.02em;
     }
 
     /* ══════════════════════════════════════════════════
@@ -1606,67 +1571,23 @@
 </section>
 
 <!-- ══ CONTACT ══════════════════════════════════════ -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="contact__grid">
-      <div class="contact__info reveal-left">
-        <span class="overline" data-lang-th="ติดต่อเรา" data-lang-en="CONTACT US">ติดต่อเรา</span>
-        <h2 data-lang-th="เราพร้อมช่วยเหลือคุณ" data-lang-en="We Are Here to Help">เราพร้อมช่วยเหลือคุณ</h2>
-        <p data-lang-th="ส่งข้อความหาเราหรือติดต่อโดยตรง ทีมที่ปรึกษาของเราพร้อมให้คำแนะนำอย่างตรงไปตรงมา ไม่มีค่าใช้จ่าย ไม่มีข้อผูกมัด" data-lang-en="Send us a message or reach out directly. Our advisory team provides honest guidance — no charge, no obligation.">ส่งข้อความหาเราหรือติดต่อโดยตรง ทีมที่ปรึกษาของเราพร้อมให้คำแนะนำอย่างตรงไปตรงมา ไม่มีค่าใช้จ่าย ไม่มีข้อผูกมัด</p>
-        <div class="contact-detail-list">
-          <div class="contact-detail">
-            <i data-lucide="map-pin" width="18" height="18"></i>
-            <span data-lang-th="เลขที่ 88 อาคาร SST ถนนรัชดาภิเษก แขวงห้วยขวาง กรุงเทพฯ 10310" data-lang-en="88 SST Building, Ratchadaphisek Road, Huai Khwang, Bangkok 10310">เลขที่ 88 อาคาร SST ถนนรัชดาภิเษก แขวงห้วยขวาง กรุงเทพฯ 10310</span>
-          </div>
-          <div class="contact-detail">
-            <i data-lucide="phone" width="18" height="18"></i>
-            <span>1387</span>
-          </div>
-          <div class="contact-detail">
-            <i data-lucide="mail" width="18" height="18"></i>
-            <span>hello@sst-life.th</span>
-          </div>
-          <div class="contact-detail">
-            <i data-lucide="clock" width="18" height="18"></i>
-            <span data-lang-th="จันทร์–ศุกร์ 08:30–17:30 น." data-lang-en="Mon–Fri 08:30–17:30">จันทร์–ศุกร์ 08:30–17:30 น.</span>
-          </div>
-        </div>
-      </div>
-
-      <form class="contact-form reveal" onsubmit="return false;">
-        <div class="form-row">
-          <div class="form-field">
-            <label data-lang-th="ชื่อ-นามสกุล" data-lang-en="Full Name">ชื่อ-นามสกุล</label>
-            <input type="text" placeholder="" autocomplete="name">
-          </div>
-          <div class="form-field">
-            <label data-lang-th="เบอร์โทรศัพท์" data-lang-en="Phone Number">เบอร์โทรศัพท์</label>
-            <input type="tel" placeholder="" autocomplete="tel">
-          </div>
-        </div>
-        <div class="form-field">
-          <label data-lang-th="อีเมล" data-lang-en="Email Address">อีเมล</label>
-          <input type="email" placeholder="" autocomplete="email">
-        </div>
-        <div class="form-field">
-          <label data-lang-th="แผนที่สนใจ" data-lang-en="Plan of Interest">แผนที่สนใจ</label>
-          <select>
-            <option value="" data-lang-th="เลือกแผนประกัน" data-lang-en="Select a plan">เลือกแผนประกัน</option>
-            <option value="shield">SST Shield</option>
-            <option value="legacy">SST Legacy</option>
-            <option value="guardian">SST Guardian</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label data-lang-th="ข้อความ" data-lang-en="Message">ข้อความ</label>
-          <textarea rows="4" placeholder=""></textarea>
-        </div>
-        <button type="submit" class="btn btn--primary" style="width:100%">
-          <i data-lucide="send" width="16" height="16"></i>
-          <span data-lang-th="ส่งข้อความ" data-lang-en="Send Message">ส่งข้อความ</span>
-        </button>
-      </form>
+<section class="cta" id="contact">
+  <div class="cta__bg"></div>
+  <div class="cta__content reveal">
+    <span class="overline" data-lang-th="เริ่มต้นวันนี้" data-lang-en="START TODAY">เริ่มต้นวันนี้</span>
+    <h2 data-lang-th="พร้อมปกป้องสิ่งที่สำคัญที่สุดสำหรับคุณแล้วหรือยัง?" data-lang-en="Ready to Protect What Matters Most?">พร้อมปกป้องสิ่งที่สำคัญที่สุดสำหรับคุณแล้วหรือยัง?</h2>
+    <p data-lang-th="รับใบเสนอราคาส่วนตัวฟรีภายใน 5 นาที ไม่มีข้อผูกมัด ไม่มีค่าใช้จ่ายใดๆ" data-lang-en="Get your free personalized quote in 5 minutes. No commitment, no fees.">รับใบเสนอราคาส่วนตัวฟรีภายใน 5 นาที ไม่มีข้อผูกมัด ไม่มีค่าใช้จ่ายใดๆ</p>
+    <div class="cta__btns">
+      <a href="#" class="btn btn--ice">
+        <i data-lucide="zap" width="18" height="18"></i>
+        <span data-lang-th="รับใบเสนอราคาฟรี" data-lang-en="Get Your Free Quote">รับใบเสนอราคาฟรี</span>
+      </a>
+      <a href="tel:1387" class="btn btn--ghost">
+        <i data-lucide="phone" width="16" height="16"></i>
+        <span data-lang-th="โทร 1387" data-lang-en="Call 1387">โทร 1387</span>
+      </a>
     </div>
+    <p class="cta__note" data-lang-th="เปิดทำการจันทร์–เสาร์ 08:00–20:00 น. | ฉุกเฉิน 24 ชม." data-lang-en="Open Mon–Sat 08:00–20:00 | Emergency 24hrs">เปิดทำการจันทร์–เสาร์ 08:00–20:00 น. | ฉุกเฉิน 24 ชม.</p>
   </div>
 </section>
 
