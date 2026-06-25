@@ -968,54 +968,62 @@
     }
 
     /* ══════════════════════════════════════════════════
-       CTA BANNER
+       CTA
     ══════════════════════════════════════════════════ */
-    .cta-band {
+    .cta {
+      padding: 6rem 1.5rem;
       position: relative;
-      padding: 6rem 0;
       overflow: hidden;
+      text-align: center;
     }
-    .cta-band__bg {
+    .cta__bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1486707471592-8e7eb7e36f78?w=1600&h=800&fit=crop');
-      background-size: cover;
-      background-position: center;
+      z-index: 0;
+      background: linear-gradient(135deg, rgba(74,127,165,0.20) 0%, rgba(200,220,240,0.05) 100%);
     }
-    .cta-band__bg::after {
+    .cta__bg::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(13,27,42,0.82);
+      background-image:
+        linear-gradient(rgba(74,127,165,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,127,165,0.12) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
-    .cta-band__content {
+    .cta__content {
       position: relative;
       z-index: 1;
-      text-align: center;
       max-width: 640px;
       margin: 0 auto;
-      padding: 0 1.5rem;
     }
-    .cta-band__content h2 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      margin: 0.5rem 0 1.25rem;
+    .cta__content h2 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin: 0.5rem 0 1rem;
       line-height: 1.45;
     }
-    html[lang="en"] .cta-band__content h2 { line-height: 1.15; }
-    .cta-band__content p {
-      color: rgba(200,220,240,0.78);
-      font-size: 1rem;
+    html[lang="en"] .cta__content h2 { line-height: 1.2; }
+    .cta__content p {
+      color: rgba(200,220,240,0.8);
+      font-size: 1.05rem;
       line-height: 1.85;
       margin-bottom: 2.5rem;
     }
-    .cta-band__btns {
+    .cta__btns {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       align-items: center;
     }
     @media (min-width: 480px) {
-      .cta-band__btns { flex-direction: row; justify-content: center; }
+      .cta__btns { flex-direction: row; justify-content: center; }
+    }
+    .cta__note {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: rgba(200,220,240,0.55);
+      font-family: var(--font-cd);
+      letter-spacing: 0.02em;
     }
 
     /* ══════════════════════════════════════════════════
@@ -1496,20 +1504,24 @@
   </div>
 </section>
 
-<!-- ══ CTA BAND ══════════════════════════════════════ -->
-<section class="cta-band" id="contact">
-  <div class="cta-band__bg"></div>
-  <div class="cta-band__content reveal">
+<!-- ══ CTA ══════════════════════════════════════════ -->
+<section class="cta" id="contact">
+  <div class="cta__bg"></div>
+  <div class="cta__content reveal">
     <span class="overline" data-lang-th="เริ่มต้นวันนี้" data-lang-en="START TODAY">เริ่มต้นวันนี้</span>
-    <h2 data-lang-th="พร้อมเริ่มต้นสู่ชีวิตที่มั่นคงแล้วหรือยัง?" data-lang-en="Ready to Secure Your Future?">พร้อมเริ่มต้นสู่ชีวิตที่มั่นคงแล้วหรือยัง?</h2>
-    <p data-lang-th="ที่ปรึกษาผู้เชี่ยวชาญของเราพร้อมช่วยคุณเลือกแผนที่เหมาะสมที่สุด ไม่มีค่าใช้จ่ายในการปรึกษา" data-lang-en="Our specialist advisors are ready to help you choose the most suitable plan — no charge for consultations.">ที่ปรึกษาผู้เชี่ยวชาญของเราพร้อมช่วยคุณเลือกแผนที่เหมาะสมที่สุด ไม่มีค่าใช้จ่ายในการปรึกษา</p>
-    <div class="cta-band__btns">
-      <a href="#contact" class="btn btn--ice" data-lang-th="รับคำปรึกษาฟรี" data-lang-en="Get Free Consultation">รับคำปรึกษาฟรี</a>
+    <h2 data-lang-th="พร้อมปกป้องสิ่งที่สำคัญที่สุดสำหรับคุณแล้วหรือยัง?" data-lang-en="Ready to Protect What Matters Most?">พร้อมปกป้องสิ่งที่สำคัญที่สุดสำหรับคุณแล้วหรือยัง?</h2>
+    <p data-lang-th="รับใบเสนอราคาส่วนตัวฟรีภายใน 5 นาที ไม่มีข้อผูกมัด ไม่มีค่าใช้จ่ายใดๆ" data-lang-en="Get your free personalized quote in 5 minutes. No commitment, no fees.">รับใบเสนอราคาส่วนตัวฟรีภายใน 5 นาที ไม่มีข้อผูกมัด ไม่มีค่าใช้จ่ายใดๆ</p>
+    <div class="cta__btns">
+      <a href="#" class="btn btn--ice">
+        <i data-lucide="zap" width="18" height="18"></i>
+        <span data-lang-th="รับใบเสนอราคาฟรี" data-lang-en="Get Your Free Quote">รับใบเสนอราคาฟรี</span>
+      </a>
       <a href="tel:1387" class="btn btn--ghost">
         <i data-lucide="phone" width="16" height="16"></i>
         <span data-lang-th="โทร 1387" data-lang-en="Call 1387">โทร 1387</span>
       </a>
     </div>
+    <p class="cta__note" data-lang-th="เปิดทำการจันทร์–เสาร์ 08:00–20:00 น. | ฉุกเฉิน 24 ชม." data-lang-en="Open Mon–Sat 08:00–20:00 | Emergency 24hrs">เปิดทำการจันทร์–เสาร์ 08:00–20:00 น. | ฉุกเฉิน 24 ชม.</p>
   </div>
 </section>
 
